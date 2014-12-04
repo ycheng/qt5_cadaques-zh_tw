@@ -1,0 +1,20 @@
+sed -e s/窗口類/窗口類別/g | \
+sed -e s/基礎類/基礎類別/g | \
+sed -e s/信息/資訊/g | \
+sed -e s/數據庫/資料庫/g | \
+sed -e s/基礎模組/核心模組/g | \
+sed -e s/于/於/g | \
+sed -e s/文檔/檔案/g | \
+sed -e s/展示/範例/g | \
+sed -e s/導出/輸出/g | \
+sed -e s/模塊/模組/g | \
+sed -e s/庫/程式庫/g | \
+sed -e s/音頻/聲音/g | \
+sed -e s/視頻/影片/g | \
+sed -e s/攝像頭/照相/g | \
+sed -e s/網絡/網路/g | \
+sed -e s/訪問/存取/g | \
+sed -e s/接口/介面/g | \
+sed -e s/反饋/回饋/g | \
+sed -e s/質量/品質/g | \
+cat
