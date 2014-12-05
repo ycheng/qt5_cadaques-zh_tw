@@ -10,5 +10,8 @@ Qt 無疑的是在這樣的的選擇下，一個強大穩定且悠久的平台�
 
 [正體中文版WIP](http://ycheng.gitbooks.io/qt5_cadaques-zh_tw/content/)
 
-[簡體中文版](https://www.gitbook.io/read/book/cwc1987/qt5cadaquesinchinese)
+[正體中文版於GitHub工作區](https://github.com/ycheng/qt5_cadaques-zh_tw)
 
+[GitHub程式碼](https://github.com/qmlbook/qmlbook)
+
+[簡體中文版](https://www.gitbook.io/read/book/cwc1987/qt5cadaquesinchinese)
