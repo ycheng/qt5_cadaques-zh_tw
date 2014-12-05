@@ -1,37 +1,37 @@
-# HTML5画布移植（Porting from HTML5 Canvas）
+# HTML5畫布移植（Porting from HTML5 Canvas）
 
 * [https://developer.mozilla.org/en/Canvas_tutorial/Transformations](https://developer.mozilla.org/en/Canvas_tutorial/Transformations)
 
 * [http://en.wikipedia.org/wiki/Spirograph](http://en.wikipedia.org/wiki/Spirograph)
 
-移植一个HTML5画布图像到QML画布非常简单。在成百上千的例子中，我们选择了一个来移植。
+移植一個HTML5畫布圖像到QML畫布非常簡單。在成百上千的例子中，我們選擇了一個來移植。
 
-**螺旋图形（Spiro Graph）**
+**螺旋圖形（Spiro Graph）**
 
-我们使用一个来自Mozila项目的螺旋图形例子来作为我们的基础示例。原始的HTML5代码被作为画布教程发布。
+我們使用一個來自Mozila項目的螺旋圖形例子來作為我們的基礎示例。原始的HTML5代碼被作為畫布教程發布。
 
-下面是我们需要修改的代码：
+下面是我們需要修改的代碼：
 
-* Qt Quick要求定义变量使用，所以我们需要添加var的定义：
+* Qt Quick要求定義變量使用，所以我們需要添加var的定義：
 ```
 for (var i=0;i<3;i++) {
     ...
 }
 ```
 
-* 修改绘制方法接收Context2D对象：
+* 修改繪制方法接收Context2D對象：
 ```
 function draw(ctx) {
     ...
 }
 ```
 
-* 由于不同的大小，我们需要对每个螺旋适配转换：
+* 由于不同的大小，我們需要對每個螺旋適配轉換：
 ```
 ctx.translate(20+j*50,20+i*50);
 ```
 
-最后我们实现onPaint操作。在onPaint中我们请求一个context，并且调用我们的绘制方法。
+最後我們實現onPaint操作。在onPaint中我們請求一個context，並且調用我們的繪制方法。
 
 ```
     onPaint: {
@@ -40,13 +40,13 @@ ctx.translate(20+j*50,20+i*50);
     }
 ```
 
-下面这个结果就是我们使用QML画布移植的螺旋图形。
+下面這個結果就是我們使用QML畫布移植的螺旋圖形。
 
 ![](http://qmlbook.org/_images/spirograph.png)
 
-**发光线（Glowing Lines）**
+**發光線（Glowing Lines）**
 
-下面有一个更加复杂的移植来自W3C组织。[原始的发光线](http://www.w3.org/TR/2dcontext/#examples)有些很不错的地方，这使得移植更加具有挑战性。
+下面有一個更加復雜的移植來自W3C組織。[原始的發光線](http://www.w3.org/TR/2dcontext/#examples)有些很不錯的地方，這使得移植更加具有挑戰性。
 
 ![](http://qmlbook.org/_images/html_glowlines.png)
 
@@ -122,9 +122,9 @@ setInterval(blank, 40);
 </html>
 ```
 
-在HTML5中，context2D对象可以随意在画布上绘制。在QML中，只能在onPaint操作中绘制。在HTML5中，通常调用setInterval使用计时器触发线段的绘制或者清屏。由于QML中不同的操作方法，仅仅只是调用这些函数不能实现我们想要的结果，因为我们需要通过onPaint操作来实现。我们也需要修改颜色的格式。让我们看看需要改变哪些东西。
+在HTML5中，context2D對象可以隨意在畫布上繪制。在QML中，只能在onPaint操作中繪制。在HTML5中，通常調用setInterval使用計時器觸發線段的繪制或者清屏。由于QML中不同的操作方法，僅僅只是調用這些函數不能實現我們想要的結果，因為我們需要通過onPaint操作來實現。我們也需要修改顏色的格式。讓我們看看需要改變哪些東西。
 
-修改从画布元素开始。为了简单，我们使用画布元素（Canvas）作为我们QML文件的根元素。
+修改從畫布元素開始。為了簡單，我們使用畫布元素（Canvas）作為我們QML文件的根元素。
 
 ```
 import QtQuick 2.0
@@ -137,9 +137,9 @@ Canvas {
 }
 ```
 
-代替直接调用的setInterval函数，我们使用两个计时器来请求重新绘制。一个计时器触发间隔较短，允许我们可以执行一些代码。我们无法告诉绘制函数哪个操作是我想触发的，我们为每个操作定义一个布尔标识，当重新绘制请求时，我们请求一个操作并且触发它。
+代替直接調用的setInterval函數，我們使用兩個計時器來請求重新繪制。一個計時器觸發間隔較短，允許我們可以執行一些代碼。我們無法告訴繪制函數哪個操作是我想觸發的，我們為每個操作定義一個布爾標識，當重新繪制請求時，我們請求一個操作並且觸發它。
 
-下面是线段绘制的代码，清屏操作类似。
+下面是線段繪制的代碼，清屏操作類似。
 
 ```
 ...
@@ -162,7 +162,7 @@ Component.onCompleted: {
 ...
 ```
 
-现在我们已经有了告诉onPaint操作中我们需要执行哪个操作的指示。当我们进入onPaint处理每个绘制请求时，我们需要提取画布元素中的初始化变量。
+現在我們已經有了告訴onPaint操作中我們需要執行哪個操作的指示。當我們進入onPaint處理每個繪制請求時，我們需要提取畫布元素中的初始化變量。
 
 ```
 Canvas {
@@ -174,7 +174,7 @@ Canvas {
 }
 ```
 
-现在我们的绘制函数应该像这样：
+現在我們的繪制函數應該像這樣：
 
 ```
 onPaint: {
@@ -190,7 +190,7 @@ onPaint: {
 }
 ```
 
-线段绘制函数提取画布作为一个参数。
+線段繪制函數提取畫布作為一個參數。
 
 ```
 function line(context) {
@@ -221,9 +221,9 @@ function line(context) {
 }
 ```
 
-最大的变化是使用QML的Qt.rgba()和Qt.hsla()。在QML中需要把变量值适配在0.0到1.0之间。
+最大的變化是使用QML的Qt.rgba()和Qt.hsla()。在QML中需要把變量值適配在0.0到1.0之間。
 
-同样应用在清屏函数中。
+同樣應用在清屏函數中。
 
 ```
 function blank(context) {
@@ -232,11 +232,11 @@ function blank(context) {
 }
 ```
 
-下面是最终结果（目前没有阴影）类似下面这样。
+下面是最終結果（目前沒有陰影）類似下面這樣。
 
 ![](http://qmlbook.org/_images/glowlines.png)
 
-查看下面的链接获得更多的信息：
+查看下面的鏈接獲得更多的信息：
 
 * [W3C HTML Canvas 2D Context Specification](http://www.w3.org/TR/2dcontext/)
 

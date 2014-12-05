@@ -1,12 +1,12 @@
 # 本地文件（Local files）
 
-使用XMLHttpRequest也可以加载本地文件（XML/JSON）。例如加载一个本地名为“colors.json”的文件可以这样使用：
+使用XMLHttpRequest也可以加載本地文件（XML/JSON）。例如加載一個本地名為“colors.json”的文件可以這樣使用：
 
 ```
 xhr.open("GET", "colors.json");
 ```
 
-我们使用它读取一个颜色表并且使用表格来显示。从QtQuick这边无法修改文件。为了将源数据存储回去，我们需要一个基于HTTP服务器的REST服务支持或者一个用来访问文件的QtQuick扩展。
+我們使用它讀取一個顏色表並且使用表格來顯示。從QtQuick這邊無法修改文件。為了將源數據存儲回去，我們需要一個基于HTTP服務器的REST服務支持或者一個用來訪問文件的QtQuick擴展。
 
 ```
 import QtQuick 2.0
@@ -49,7 +49,7 @@ Rectangle {
 }
 ```
 
-也可以使用XmlListModel来替代XMLHttpRequest访问本地文件。
+也可以使用XmlListModel來替代XMLHttpRequest訪問本地文件。
 
 ```
 import QtQuick.XmlListModel 2.0
@@ -62,4 +62,4 @@ XmlListModel {
 }
 ```
 
-XmlListModel只能用来读取XML文件，不能读取JSON文件。
+XmlListModel只能用來讀取XML文件，不能讀取JSON文件。

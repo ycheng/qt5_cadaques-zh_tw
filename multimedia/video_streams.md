@@ -1,6 +1,6 @@
-# 视频流（Video Streams）
+# 視頻流（Video Streams）
 
-VideoOutput元素不被限制与MediaPlayer元素绑定使用的。它也可以直接用来加载实时视频资源显示一个流媒体。应用程序使用Camera元素作为资源。来自Camera的视频流给用户提供了一个实时流媒体。
+VideoOutput元素不被限制與MediaPlayer元素綁定使用的。它也可以直接用來加載實時視頻資源顯示一個流媒體。應用程序使用Camera元素作為資源。來自Camera的視頻流給用戶提供了一個實時流媒體。
 
 ```
 import QtQuick 2.0

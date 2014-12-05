@@ -1,14 +1,14 @@
-# 使用开放授权登陆验证（Authentication using OAuth）
+# 使用開放授權登陸驗證（Authentication using OAuth）
 
-OAuth是一个开放协议，允许简单的安全验证，是来自web的典型方法，用于移动和桌面应用程序。使用OAuth对通常的web服务的客户端进行身份验证，例如Google，Facebook和Twitter。
+OAuth是一個開放協議，允許簡單的安全驗證，是來自web的典型方法，用于移動和桌面應用程序。使用OAuth對通常的web服務的客戶端進行身份驗證，例如Google，Facebook和Twitter。
 
 **注意**
 
-**对于自定义的web服务，你也可以使用典型的HTTP身份验证，例如使用XMLHttpRequest的用户名和密码的获取方法（比如xhr.open(verb,url,true,username,password））。**
+**對于自定義的web服務，你也可以使用典型的HTTP身份驗證，例如使用XMLHttpRequest的用戶名和密碼的獲取方法（比如xhr.open(verb,url,true,username,password））。**
 
-Auth目前不是QML/JS的接口，你需要写一些C++代码并且将身份验证导入到QML/JS中。另一个问题是安全的存储访问密码。
+Auth目前不是QML/JS的接口，你需要寫一些C++代碼並且將身份驗證導入到QML/JS中。另一個問題是安全的存儲訪問密碼。
 
-下面这些是我找到的有用的连接：
+下面這些是我找到的有用的連接：
 
 * http://oauth.net
 

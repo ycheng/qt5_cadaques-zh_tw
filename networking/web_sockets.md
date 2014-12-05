@@ -1,17 +1,17 @@
 # Web Sockets
 
-webSockets不是Qt提供的。将WebSockets加入到Qt/QML中需要花费一些工作。从作者的角度来看WebSockets有巨大的潜力来添加HTTP服务缺少的功能-通知。HTTP给了我们get和post的功能，但是post还不是一个通知。目前客户端轮询服务器来获得应用程序的服务，服务器也需要能通知客户端变化和事件。你可以与QML接口比较：属性，函数，信号。也可以叫做获取/设置/调用和通知。
+webSockets不是Qt提供的。將WebSockets加入到Qt/QML中需要花費一些工作。從作者的角度來看WebSockets有巨大的潛力來添加HTTP服務缺少的功能-通知。HTTP給了我們get和post的功能，但是post還不是一個通知。目前客戶端輪詢服務器來獲得應用程序的服務，服務器也需要能通知客戶端變化和事件。你可以與QML接口比較：屬性，函數，信號。也可以叫做獲取/設置/調用和通知。
 
-QML WebSocket插件将会在Qt5中加入。你可以试试来自qt playground的web sockets插件。为了测试，我们使用一个现有的web socket服务实现了echo server。
+QML WebSocket插件將會在Qt5中加入。你可以試試來自qt playground的web sockets插件。為了測試，我們使用一個現有的web socket服務實現了echo server。
 
-首先确保你使用的Qt5.2.x。
+首先確保你使用的Qt5.2.x。
 
 ```
 $ qmake --version
 ... Using Qt version 5.2.0 ...
 ```
 
-然后你需要克隆web socket的代码库，并且编译它。
+然後你需要克隆web socket的代碼庫，並且編譯它。
 
 ```
 $ git clone git@gitorious.org:qtplayground/websockets.git
@@ -21,7 +21,7 @@ $ make
 $ make install
 ```
 
-现在你可以在qml模块中使用web socket。
+現在你可以在qml模塊中使用web socket。
 
 ```
 import Qt.WebSockets 1.0
@@ -31,7 +31,7 @@ WebSocket {
 }
 ```
 
-测试你的web socket，我们使用来自[http://websocket.org](http://websocket.org)的echo server 。
+測試你的web socket，我們使用來自[http://websocket.org](http://websocket.org)的echo server 。
 
 ```
 import QtQuick 2.0
@@ -64,22 +64,22 @@ Text {
 }
 ```
 
-你可以看到我们使用socket.sendTextMessage("ping")作为响应在文本区域中。
+你可以看到我們使用socket.sendTextMessage("ping")作為響應在文本區域中。
 
 ![](http://qmlbook.org/_images/ws_echo.png)
 
 ## 11.8.1 WS Server
 
-你可以使用Qt WebSocket的C++部分来创建你自己的WS Server或者使用一个不同的WS实现。它非常有趣，是因为它允许连接使用大量扩展的web应用程序服务的高质量渲染的QML。在这个例子中，我们将使用基于web socket的ws模块的Node JS。你首先需要安装node.js。然后创建一个ws_server文件夹，使用node package manager（npm）安装ws包。
+你可以使用Qt WebSocket的C++部分來創建你自己的WS Server或者使用一個不同的WS實現。它非常有趣，是因為它允許連接使用大量擴展的web應用程序服務的高質量渲染的QML。在這個例子中，我們將使用基于web socket的ws模塊的Node JS。你首先需要安裝node.js。然後創建一個ws_server文件夾，使用node package manager（npm）安裝ws包。
 
 ```
 $ cd ws_server
 $ npm install ws
 ```
 
-npm工具下载并安装了ws包到你的本地依赖文件夹中。
+npm工具下載並安裝了ws包到你的本地依賴文件夾中。
 
-一个server.js文件是我们服务器的实现。服务器代码将在端口3000创建一个web socket服务并监听连接。在一个连接加入后，它将会发送一个欢迎并等待客户端信息。每个客户端发送到socket信息都会发送回客户端。
+一個server.js文件是我們服務器的實現。服務器代碼將在端口3000創建一個web socket服務並監聽連接。在一個連接加入後，它將會發送一個歡迎並等待客戶端信息。每個客戶端發送到socket信息都會發送回客戶端。
 
 ```
 var WebSocketServer = require('ws').Server;
@@ -98,13 +98,13 @@ server.on('connection', function(socket) {
 console.log('listening on port ' + server.options.port);
 ```
 
-你需要获取使用的JavaScript标记和回调函数。
+你需要獲取使用的JavaScript標記和回調函數。
 
 ## 11.8.2 WS Client
 
-在客户端我们需要一个链表视图来显示信息，和一个文本输入来输入新的聊天信息。
+在客戶端我們需要一個鏈表視圖來顯示信息，和一個文本輸入來輸入新的聊天信息。
 
-在例子中我们使用一个白色的标签。
+在例子中我們使用一個白色的標簽。
 
 ```
 // Label.qml
@@ -117,7 +117,7 @@ Text {
 }
 ```
 
-我们的聊天视图是一个链表视图，文本被加入到链表模型中。每个条目显示使用行前缀和信息标签。我们使用单元将它分为24列。
+我們的聊天視圖是一個鏈表視圖，文本被加入到鏈表模型中。每個條目顯示使用行前綴和信息標簽。我們使用單元將它分為24列。
 
 ```
 // ChatView.qml
@@ -152,7 +152,7 @@ ListView {
 }
 ```
 
-聊天输入框是一个简单的使用颜色包裹边界的文本输入。
+聊天輸入框是一個簡單的使用顏色包裹邊界的文本輸入。
 
 ```
 // ChatInput.qml
@@ -187,7 +187,7 @@ FocusScope {
 }
 ```
 
-当web socket返回一个信息后，它将会把信息添加到聊天视图中。这也同样适用于状态改变。也可以当用户输入一个聊天信息，将聊天信息拷贝添加到客户端的聊天视图中，并将信息发送给服务器。
+當web socket返回一個信息後，它將會把信息添加到聊天視圖中。這也同樣適用于狀態改變。也可以當用戶輸入一個聊天信息，將聊天信息拷貝添加到客戶端的聊天視圖中，並將信息發送給服務器。
 
 ```
 // ws_client.qml
@@ -240,22 +240,22 @@ Rectangle {
 }
 ```
 
-你首先需要运行服务器，然后是客户端。在我们简单例子中没有客户端重连的机制。
+你首先需要運行服務器，然後是客戶端。在我們簡單例子中沒有客戶端重連的機制。
 
-运行服务器
+運行服務器
 
 ```
 $ cd ws_server
 $ node server.js
 ```
 
-运行客户端
+運行客戶端
 
 ```
 $ cd ws_client
 $ qmlscene ws_client.qml
 ```
 
-当输入文本并点击发送后，你可以看到类似下面这样。
+當輸入文本並點擊發送後，你可以看到類似下面這樣。
 
 ![](http://qmlbook.org/_images/ws_client.png)

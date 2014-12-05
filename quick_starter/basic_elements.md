@@ -1,31 +1,31 @@
 # 基本元素（Basic Elements）
 
-元素可以被分为可视化元素与非可视化元素。一个可视化元素（例如矩形框Rectangle）有着几何形状并且可以在屏幕上显示。一个非可视化元素（例如计时器Timer）提供了常用的功能，通常用于操作可视化元素。
+元素可以被分為可視化元素與非可視化元素。一個可視化元素（例如矩形框Rectangle）有著幾何形狀並且可以在屏幕上顯示。一個非可視化元素（例如計時器Timer）提供了常用的功能，通常用于操作可視化元素。
 
-现在我们将专注于几个基础的可视化元素，例如Item（基础元素对象），Rectangle（矩形框），Text（文本），Image（图像）和MouseArea（鼠标区域）。
+現在我們將專注于幾個基礎的可視化元素，例如Item（基礎元素對象），Rectangle（矩形框），Text（文本），Image（圖像）和MouseArea（鼠標區域）。
 
-## 4.2.1 基础元素对象（Item Element）
+## 4.2.1 基礎元素對象（Item Element）
 
-Item（基础元素对象）是所有可视化元素的基础对象，所有其它的可视化元素都继承自Item。它自身不会有任何绘制操作，但是定义了所有可视化元素共有的属性：
+Item（基礎元素對象）是所有可視化元素的基礎對象，所有其它的可視化元素都繼承自Item。它自身不會有任何繪制操作，但是定義了所有可視化元素共有的屬性：
 
-| Group（分组） | 	Properties（属性） |
+| Group（分組） | 	Properties（屬性） |
 | -- | -- |
-| Geometry（几何属性） | x,y（坐标）定义了元素左上角的位置，width，height（长和宽）定义元素的显示范围，z（堆叠次序）定义元素之间的重叠顺序。 |
-| Layout handling（布局操作）| anchors（锚定），包括左（left），右（right），上（top），下（bottom），水平与垂直居中（vertical center，horizontal center），与margins（间距）一起定义了元素与其它元素之间的位置关系。 |
-| Key handlikng（按键操作） | 附加属性key（按键）和keyNavigation（按键定位）属性来控制按键操作，处理输入焦点（focus）可用操作。 |
-| Transformation（转换） | 缩放（scale）和rotate（旋转）转换，通用的x,y,z属性列表转换（transform），旋转基点设置（transformOrigin）。 |
-| Visual（可视化） | 不透明度（opacity）控制透明度，visible（是否可见）控制元素是否显示，clip（裁剪）用来限制元素边界的绘制，smooth（平滑）用来提高渲染质量。 |
-| State definition（状态定义） | states（状态列表属性）提供了元素当前所支持的状态列表，当前属性的改变也可以使用transitions（转变）属性列表来定义状态转变动画。 |
+| Geometry（幾何屬性） | x,y（坐標）定義了元素左上角的位置，width，height（長和寬）定義元素的顯示範圍，z（堆疊次序）定義元素之間的重疊順序。 |
+| Layout handling（布局操作）| anchors（錨定），包括左（left），右（right），上（top），下（bottom），水平與垂直居中（vertical center，horizontal center），與margins（間距）一起定義了元素與其它元素之間的位置關系。 |
+| Key handlikng（按鍵操作） | 附加屬性key（按鍵）和keyNavigation（按鍵定位）屬性來控制按鍵操作，處理輸入焦點（focus）可用操作。 |
+| Transformation（轉換） | 縮放（scale）和rotate（旋轉）轉換，通用的x,y,z屬性列表轉換（transform），旋轉基點設置（transformOrigin）。 |
+| Visual（可視化） | 不透明度（opacity）控制透明度，visible（是否可見）控制元素是否顯示，clip（裁剪）用來限制元素邊界的繪制，smooth（平滑）用來提高渲染質量。 |
+| State definition（狀態定義） | states（狀態列表屬性）提供了元素當前所支持的狀態列表，當前屬性的改變也可以使用transitions（轉變）屬性列表來定義狀態轉變動畫。 |
 
-为了更好的理解不同的属性，我们将会在这章中尽量的介绍这些元素的显示效果。请记住这些基本的属性在所有可视化元素中都是可以使用的，并且在这些元素中的工作方式都是相同的。
+為了更好的理解不同的屬性，我們將會在這章中盡量的介紹這些元素的顯示效果。請記住這些基本的屬性在所有可視化元素中都是可以使用的，並且在這些元素中的工作方式都是相同的。
 
 **注意**
 
-**Item（基本元素对象）通常被用来作为其它元素的容器使用，类似HTML语言中的div元素（div element）。**
+**Item（基本元素對象）通常被用來作為其它元素的容器使用，類似HTML語言中的div元素（div element）。**
 
 ## 4.2.2 矩形框元素（Rectangle Element）
 
-Rectangle（矩形框）是基本元素对象的一个扩展，增加了一个颜色来填充它。它还支持边界的定义，使用border.color（边界颜色），border.width（边界宽度）来自定义边界。你可以使用radius（半径）属性来创建一个圆角矩形。
+Rectangle（矩形框）是基本元素對象的一個擴展，增加了一個顏色來填充它。它還支持邊界的定義，使用border.color（邊界顏色），border.width（邊界寬度）來自定義邊界。你可以使用radius（半徑）屬性來創建一個圓角矩形。
 
 ```
     Rectangle {
@@ -48,9 +48,9 @@ Rectangle（矩形框）是基本元素对象的一个扩展，增加了一个�
 
 **注意**
 
-**颜色的命名是来自SVG颜色的名称（查看[http://www.w3.org/TR/css3-color/#svg-color]( http://www.w3.org/TR/css3-color/#svg-color)可以获取更多的颜色名称）。你也可以使用其它的方法来指定颜色，比如RGB字符串（'#FF4444'），或者一个颜色名字（例如'white'）。**
+**顏色的命名是來自SVG顏色的名稱（查看[http://www.w3.org/TR/css3-color/#svg-color]( http://www.w3.org/TR/css3-color/#svg-color)可以獲取更多的顏色名稱）。你也可以使用其它的方法來指定顏色，比如RGB字符串（'#FF4444'），或者一個顏色名字（例如'white'）。**
 
-此外，填充的颜色与矩形的边框也支持自定义的渐变色。
+此外，填充的顏色與矩形的邊框也支持自定義的漸變色。
 
 ```
     Rectangle {
@@ -67,19 +67,19 @@ Rectangle（矩形框）是基本元素对象的一个扩展，增加了一个�
 
 ![](http://qmlbook.org/_images/rectangle3.png)
 
-一个渐变色是由一系列的梯度值定义的。每一个值定义了一个位置与颜色。位置标记了y轴上的位置（0 = 顶，1 = 底）。GradientStop（倾斜点）的颜色标记了颜色的位置。
+一個漸變色是由一系列的梯度值定義的。每一個值定義了一個位置與顏色。位置標記了y軸上的位置（0 = 頂，1 = 底）。GradientStop（傾斜點）的顏色標記了顏色的位置。
 
 **注意**
 
-**一个矩形框如果没有width/height（宽度与高度）将不可见。如果你有几个相互关联width/height（宽度与高度）的矩形框，在你组合逻辑中出了错后可能就会发生矩形框不可见，请注意这一点。**
+**一個矩形框如果沒有width/height（寬度與高度）將不可見。如果你有幾個相互關聯width/height（寬度與高度）的矩形框，在你組合邏輯中出了錯後可能就會發生矩形框不可見，請注意這一點。**
 
 **注意**
 
-**这个函数无法创建一个梯形，最好使用一个已有的图像来创建梯形。有一种可能是在旋转梯形时，旋转的矩形几何结构不会发生改变，但是这会导致几何元素相同的可见区域的混淆。从作者的观点来看类似的情况下最好使用设计好的梯形图形来完成绘制。**
+**這個函數無法創建一個梯形，最好使用一個已有的圖像來創建梯形。有一種可能是在旋轉梯形時，旋轉的矩形幾何結構不會發生改變，但是這會導致幾何元素相同的可見區域的混淆。從作者的觀點來看類似的情況下最好使用設計好的梯形圖形來完成繪制。**
 
 ## 4.2.3 文本元素（Text Element）
 
-显示文本你需要使用Text元素（Text Element）。它最值得注意的属性时字符串类型的text属性。这个元素会使用给出的text（文本）与font（字体）来计算初始化的宽度与高度。可以使用字体属性组来（font property group）来改变当前的字体，例如font.family，font.pixelSize，等等。改变文本的颜色值只需要改变颜色属性就可以了。
+顯示文本你需要使用Text元素（Text Element）。它最值得注意的屬性時字符串類型的text屬性。這個元素會使用給出的text（文本）與font（字體）來計算初始化的寬度與高度。可以使用字體屬性組來（font property group）來改變當前的字體，例如font.family，font.pixelSize，等等。改變文本的顏色值只需要改變顏色屬性就可以了。
 
 ```
     Text {
@@ -92,7 +92,7 @@ Rectangle（矩形框）是基本元素对象的一个扩展，增加了一个�
 
 ![](http://qmlbook.org/_images/text.png)
 
-文本可以使用horizontalAlignment与verticalAlignment属性来设置它的对齐效果。为了提高文本的渲染效果，你可以使用style和styleColor属性来配置文字的外框效果，浮雕效果或者凹陷效果。对于过长的文本，你可能需要使用省略号来表示，例如A very ... long text，你可以使用elide属性来完成这个操作。elide属性允许你设置文本左边，右边或者中间的省略位置。如果你不想'....'省略号出现，并且希望使用文字换行的方式显示所有的文本，你可以使用wrapMode属性（这个属性只在明确设置了宽度后才生效）：
+文本可以使用horizontalAlignment與verticalAlignment屬性來設置它的對齊效果。為了提高文本的渲染效果，你可以使用style和styleColor屬性來配置文字的外框效果，浮雕效果或者凹陷效果。對于過長的文本，你可能需要使用省略號來表示，例如A very ... long text，你可以使用elide屬性來完成這個操作。elide屬性允許你設置文本左邊，右邊或者中間的省略位置。如果你不想'....'省略號出現，並且希望使用文字換行的方式顯示所有的文本，你可以使用wrapMode屬性（這個屬性只在明確設置了寬度後才生效）：
 
 ```
 Text {
@@ -110,20 +110,20 @@ Text {
 }
 ```
 
-一个text元素（text element）只显示的文本，它不会渲染任何背景修饰。除了显示的文本，text元素背景是透明的。为一个文本元素提供背景是你自己需要考虑的问题。
+一個text元素（text element）只顯示的文本，它不會渲染任何背景修飾。除了顯示的文本，text元素背景是透明的。為一個文本元素提供背景是你自己需要考慮的問題。
 
 **注意**
 
-**知道一个文本元素（Text Element）的初始宽度与高度是依赖于文本字符串和设置的字体这一点很重要。一个没有设置宽度或者文本的文本元素（Text Element）将不可见，默认的初始宽度是0。**
+**知道一個文本元素（Text Element）的初始寬度與高度是依賴于文本字符串和設置的字體這一點很重要。一個沒有設置寬度或者文本的文本元素（Text Element）將不可見，默認的初始寬度是0。**
 
 **注意**
 
-**通常你想要对文本元素布局时，你需要区分文本在文本元素内部的边界对齐和由元素边界自动对齐。前一种情况你需要使用horizontalAlignment和verticalAlignment属性来完成，后一种情况你需要操作元素的几何形状或者使用anchors（锚定）来完成。**
+**通常你想要對文本元素布局時，你需要區分文本在文本元素內部的邊界對齊和由元素邊界自動對齊。前一種情況你需要使用horizontalAlignment和verticalAlignment屬性來完成，後一種情況你需要操作元素的幾何形狀或者使用anchors（錨定）來完成。**
 
-## 4.2.4 图像元素（Image Element）
+## 4.2.4 圖像元素（Image Element）
 
 
-一个图像元素（Image Element）能够显示不同格式的图像（例如PNG,JPG,GIF,BMP）。想要知道更加详细的图像格式支持信息，可以查看Qt的相关文档。source属性（source property）提供了图像文件的链接信息，fillMode（文件模式）属性能够控制元素对象的大小调整行为。
+一個圖像元素（Image Element）能夠顯示不同格式的圖像（例如PNG,JPG,GIF,BMP）。想要知道更加詳細的圖像格式支持信息，可以查看Qt的相關文檔。source屬性（source property）提供了圖像文件的鏈接信息，fillMode（文件模式）屬性能夠控制元素對象的大小調整行為。
 
 ```
     Image {
@@ -146,20 +146,20 @@ Text {
 
 **注意**
 
-**一个URL可以是使用'/'语法的本地路径（"./images/home.png"）或者一个网络链接（"[http://example.org/home.png](http://example.org/home.png)"）。**
+**一個URL可以是使用'/'語法的本地路徑（"./images/home.png"）或者一個網絡鏈接（"[http://example.org/home.png](http://example.org/home.png)"）。**
 
 **注意**
 
-**图像元素（Image element）使用PreserveAspectCrop可以避免裁剪图像数据被渲染到图像边界外。默认情况下裁剪是被禁用的（clip:false）。你需要打开裁剪（clip:true）来约束边界矩形的绘制。这对任何可视化元素都是有效的。**
+**圖像元素（Image element）使用PreserveAspectCrop可以避免裁剪圖像數據被渲染到圖像邊界外。默認情況下裁剪是被禁用的（clip:false）。你需要打開裁剪（clip:true）來約束邊界矩形的繪制。這對任何可視化元素都是有效的。**
 
-**建议**
+**建議**
 
-**使用QQmlImageProvider你可以通过C++代码来创建自己的图像提供器，这允许你动态创建图像并且使用线程加载。**
+**使用QQmlImageProvider你可以通過C++代碼來創建自己的圖像提供器，這允許你動態創建圖像並且使用線程加載。**
 
-## 4.2.5 鼠标区域元素（MouseArea Element）
+## 4.2.5 鼠標區域元素（MouseArea Element）
 
 
-为了与不同的元素交互，你通常需要使用MouseArea（鼠标区域）元素。这是一个矩形的非可视化元素对象，你可以通过它来捕捉鼠标事件。当用户与可视化端口交互时，mouseArea通常被用来与可视化元素对象一起执行命令。
+為了與不同的元素交互，你通常需要使用MouseArea（鼠標區域）元素。這是一個矩形的非可視化元素對象，你可以通過它來捕捉鼠標事件。當用戶與可視化端口交互時，mouseArea通常被用來與可視化元素對象一起執行命令。
 
 ```
     Rectangle {
@@ -191,4 +191,4 @@ Text {
 
 **注意**
 
-**这是QtQuick中非常重要的概念，输入处理与可视化显示分开。这样你的交互区域可以比你显示的区域大很多。**
+**這是QtQuick中非常重要的概念，輸入處理與可視化顯示分開。這樣你的交互區域可以比你顯示的區域大很多。**

@@ -1,24 +1,24 @@
-# 高级用法（Advanced Techniques）
+# 高級用法（Advanced Techniques）
 
-## 6.5.1 路径视图（The PathView）
+## 6.5.1 路徑視圖（The PathView）
 
-路径视图（PathView）非常强大，但也非常复杂，这个视图由QtQuick提供。它创建了一个可以让子项沿着任意路径移动的视图。沿着相同的路径，使用缩放（scale），透明（opacity）等元素可以更加详细的控制过程。
+路徑視圖（PathView）非常強大，但也非常復雜，這個視圖由QtQuick提供。它創建了一個可以讓子項沿著任意路徑移動的視圖。沿著相同的路徑，使用縮放（scale），透明（opacity）等元素可以更加詳細的控制過程。
 
-当使用路径视图（PathView）时，你必须定义一个代理和一个路径。在这些之上，路径视图（PathView）本身也可以自定义一些属性的区间。通常会使用pathItemCount属性，它控制了一次可见的子项总数。preferredHighLightBegin属性控制了高亮区间，preferredHighlightEnd与highlightRangeMode，控制了当前项怎样沿着路径显示。
+當使用路徑視圖（PathView）時，你必須定義一個代理和一個路徑。在這些之上，路徑視圖（PathView）本身也可以自定義一些屬性的區間。通常會使用pathItemCount屬性，它控制了一次可見的子項總數。preferredHighLightBegin屬性控制了高亮區間，preferredHighlightEnd與highlightRangeMode，控制了當前項怎樣沿著路徑顯示。
 
-在关注高亮区间之前，我们必须先看看路径（path）这个属性。路径（path）属性使用一个路径（path）元素来定义路径视图（PathView）内代理的滚动路径。路径使用startx与starty属性来链接路径（path）元素，例如PathLine,PathQuad和PathCubic。这些元素都使用二维数组来构造路径。
+在關注高亮區間之前，我們必須先看看路徑（path）這個屬性。路徑（path）屬性使用一個路徑（path）元素來定義路徑視圖（PathView）內代理的滾動路徑。路徑使用startx與starty屬性來鏈接路徑（path）元素，例如PathLine,PathQuad和PathCubic。這些元素都使用二維數組來構造路徑。
 
-当路径定义好之后，可以使用PathPercent和PathAttribute元素来进一步设置。它们被放置在路径元素之间，并且为经过它们的路径和代理提供更加细致的控制。PathPercent提供了如何控制每个元素之间覆盖区域部分的路径，然后反过来控制分布在这条路径上的代理元素，它们被按比例的分布播放。
+當路徑定義好之後，可以使用PathPercent和PathAttribute元素來進一步設置。它們被放置在路徑元素之間，並且為經過它們的路徑和代理提供更加細致的控制。PathPercent提供了如何控制每個元素之間覆蓋區域部分的路徑，然後反過來控制分布在這條路徑上的代理元素，它們被按比例的分布播放。
 
-preferredHightlightBegin与preferredHighlightEnd属性由PathView（路径视图）输入到图片元素中。它们的值在0~1之间。结束值大于等于开始值。例如设置这些属性值为0.5，当前项只会显示当前百分之50的图像在这个路径上。
+preferredHightlightBegin與preferredHighlightEnd屬性由PathView（路徑視圖）輸入到圖片元素中。它們的值在0~1之間。結束值大于等于開始值。例如設置這些屬性值為0.5，當前項只會顯示當前百分之50的圖像在這個路徑上。
 
-在Path中，PathAttribute元素也是被放置在元素之间的，就像PathPercent元素。它们可以让你指定属性的值然后插入的路径中去。这些属性与代理绑定可以用来控制任意的属性。
+在Path中，PathAttribute元素也是被放置在元素之間的，就像PathPercent元素。它們可以讓你指定屬性的值然後插入的路徑中去。這些屬性與代理綁定可以用來控制任意的屬性。
 
 ![](http://qmlbook.org/_images/pathview-coverview.png)
 
-下面这个例子展示了路径视图（PathView）如何创建一个卡片视图，并且用户可以滑动它。我们使用了一些技巧来完成这个例子。路径由PathLine元素组成。使用PathPercent元素，它确保了中间的元素居中，并且给其它的元素提供了足够的空间。使用PathAttribute元素来控制旋转，大小和深度值（z-value）。
+下面這個例子展示了路徑視圖（PathView）如何創建一個卡片視圖，並且用戶可以滑動它。我們使用了一些技巧來完成這個例子。路徑由PathLine元素組成。使用PathPercent元素，它確保了中間的元素居中，並且給其它的元素提供了足夠的空間。使用PathAttribute元素來控制旋轉，大小和深度值（z-value）。
 
-在这个路径之上（path），需要设置路径视图（PathView）的pathItemCount属性。它控制了路径的浓密度。路径视图的路径（PathView.onPath）使用preferredHighlightBegin与preferredHighlightEnd来控制可见的代理项。
+在這個路徑之上（path），需要設置路徑視圖（PathView）的pathItemCount屬性。它控制了路徑的濃密度。路徑視圖的路徑（PathView.onPath）使用preferredHighlightBegin與preferredHighlightEnd來控制可見的代理項。
 
 ```
     PathView {
@@ -56,9 +56,9 @@ preferredHightlightBegin与preferredHighlightEnd属性由PathView（路径视图
 ```
 
 
-代理如下面所示，使用了一些从PathAttribute中链接的属性，itemZ,itemAngle和itemScale。需要注意代理链接的属性只在wrapper中可用。因此，rotxs属性在Rotation元素中定义为可访问值。
+代理如下面所示，使用了一些從PathAttribute中鏈接的屬性，itemZ,itemAngle和itemScale。需要注意代理鏈接的屬性只在wrapper中可用。因此，rotxs屬性在Rotation元素中定義為可訪問值。
 
-另一个需要注意的是路径视图（PathView）链接的PathView.onPath属性的用法。通常对于这个属性都绑定为可见，这样允许路径视图（PathView）缓冲不可见的元素。这不是通过剪裁处理来实现的，因为路径视图（PathView）的代理比其它的视图，例如链表视图（ListView）或者栅格视图（GridView）放置更加随意。
+另一個需要注意的是路徑視圖（PathView）鏈接的PathView.onPath屬性的用法。通常對于這個屬性都綁定為可見，這樣允許路徑視圖（PathView）緩衝不可見的元素。這不是通過剪裁處理來實現的，因為路徑視圖（PathView）的代理比其它的視圖，例如鏈表視圖（ListView）或者柵格視圖（GridView）放置更加隨意。
 
 ```
     Component {
@@ -94,21 +94,21 @@ preferredHightlightBegin与preferredHighlightEnd属性由PathView（路径视图
     }
 ```
 
-当在路径视图（PathView）上使用图像转换或者其它更加复杂的元素时，有一个性能优化的技巧是绑定图像元素（Image）的smooth属性与PathView.view.moving属性。这意味着图像在移动时可能不够完美，但是能够比较平滑的转换。当视图在移动时，对于平滑缩放的处理是没有意义的，因为用户根本看不见这个过程。
+當在路徑視圖（PathView）上使用圖像轉換或者其它更加復雜的元素時，有一個性能優化的技巧是綁定圖像元素（Image）的smooth屬性與PathView.view.moving屬性。這意味著圖像在移動時可能不夠完美，但是能夠比較平滑的轉換。當視圖在移動時，對于平滑縮放的處理是沒有意義的，因為用戶根本看不見這個過程。
 
 ## 6.5.2 XML模型（A Model from XML）
 
-由于XML是一种常见的数据格式，QML提供了XmlListModel元素来包装XML数据。这个元素能够获取本地或者网络上的XML数据，然后通过XPath解析这些数据。
+由于XML是一種常見的數據格式，QML提供了XmlListModel元素來包裝XML數據。這個元素能夠獲取本地或者網絡上的XML數據，然後通過XPath解析這些數據。
 
-下面这个例子展示了从RSS流中获取图片，源属性（source）引用了一个网络地址，这个数据会自动下载。
+下面這個例子展示了從RSS流中獲取圖片，源屬性（source）引用了一個網絡地址，這個數據會自動下載。
 
 ![](http://qmlbook.org/_images/xmllistmodel-images.png)
 
-当数据下载完成后，它会被加工作为模型的子项。查询属性（query）是一个XPath代理的基础查询，用来创建模型项。在这个例子中，这个路径是/rss/channel/item，所以，在一个模型子项创建后，每一个子项的标签，都包含了一个频道标签，包含一个RSS标签。
+當數據下載完成後，它會被加工作為模型的子項。查詢屬性（query）是一個XPath代理的基礎查詢，用來創建模型項。在這個例子中，這個路徑是/rss/channel/item，所以，在一個模型子項創建後，每一個子項的標簽，都包含了一個頻道標簽，包含一個RSS標簽。
 
-每一个模型项，一些规则需要被提取，由XmlRole元素来代理。每一个规则都需要一个名称，这样代理才能够通过属性绑定来访问。每个这样的属性的值都通过XPath查询来确定。例如标题属性（title）符合title/string()查询，返回内容中在之间的值。
+每一個模型項，一些規則需要被提取，由XmlRole元素來代理。每一個規則都需要一個名稱，這樣代理才能夠通過屬性綁定來訪問。每個這樣的屬性的值都通過XPath查詢來確定。例如標題屬性（title）符合title/string()查詢，返回內容中在之間的值。
 
-图像源属性（imageSource）更加有趣，因为它不仅仅是从XML中提取字符串，也需要加载它。在流数据的支持下，每个子项包含了一个图片。使用XPath的函数substring-after与substring-before，可以提取本地的图片资源。这样imageSource属性就可以直接被作为一个Image元素的source属性使用。
+圖像源屬性（imageSource）更加有趣，因為它不僅僅是從XML中提取字符串，也需要加載它。在流數據的支持下，每個子項包含了一個圖片。使用XPath的函數substring-after與substring-before，可以提取本地的圖片資源。這樣imageSource屬性就可以直接被作為一個Image元素的source屬性使用。
 
 ```
 import QtQuick 2.0
@@ -158,21 +158,21 @@ Item {
 }
 ```
 
-## 6.5.3 链表分段（Lists with Sections）
+## 6.5.3 鏈表分段（Lists with Sections）
 
-有时，链表的数据需要划分段。例如使用首字母来划分联系人，或者音乐。使用链表视图可以把平面列表按类别划分。
+有時，鏈表的數據需要劃分段。例如使用首字母來劃分聯系人，或者音樂。使用鏈表視圖可以把平面列表按類別劃分。
 
 ![](http://qmlbook.org/_images/listview-sections.png)
 
-为了使用分段，section.property与section.criteria必须安装。section.property定义了哪些属性用于内容的划分。在这里，最重要的是知道每一段由哪些连续的元素构成，否则相同的属性名可能出现在几个不同的地方。
+為了使用分段，section.property與section.criteria必須安裝。section.property定義了哪些屬性用于內容的劃分。在這裡，最重要的是知道每一段由哪些連續的元素構成，否則相同的屬性名可能出現在幾個不同的地方。
 
-section.criteria能够被设置为ViewSection.FullString或者ViewSection.FirstCharacter。默认下使用第一个值，能够被用于模型中有清晰的分段，例如音乐专辑。第二个是使用一个属性的首字母来分段，这说明任何属性都可以被使用。通常的例子是用于联系人名单的姓。
+section.criteria能夠被設置為ViewSection.FullString或者ViewSection.FirstCharacter。默認下使用第一個值，能夠被用于模型中有清晰的分段，例如音樂專輯。第二個是使用一個屬性的首字母來分段，這說明任何屬性都可以被使用。通常的例子是用于聯系人名單的姓。
 
-当段被定义好后，每个子项能够使用绑定属性ListView.section，ListView.previousSection与ListView.nextSection来访问。使用这些属性，可以检测段的第一个与最后一个子项。
+當段被定義好後，每個子項能夠使用綁定屬性ListView.section，ListView.previousSection與ListView.nextSection來訪問。使用這些屬性，可以檢測段的第一個與最後一個子項。
 
-使用链表视图（ListView）的section.delegate属性可以给段指定代理组件。它能够创建段标题，并且可以在任意子项之前插入这个段代理。使用绑定属性section可以访问当前段的名称。
+使用鏈表視圖（ListView）的section.delegate屬性可以給段指定代理組件。它能夠創建段標題，並且可以在任意子項之前插入這個段代理。使用綁定屬性section可以訪問當前段的名稱。
 
-下面这个例子使用国际分类展示了分段的一些概念。国籍（nation）作为section.property，段代理组件（section.delegate）使用每个国家作为标题。在每个段中，spacemen模型中的名字使用spaceManDelegate组件来代理显示。
+下面這個例子使用國際分類展示了分段的一些概念。國籍（nation）作為section.property，段代理組件（section.delegate）使用每個國家作為標題。在每個段中，spacemen模型中的名字使用spaceManDelegate組件來代理顯示。
 
 ```
 import QtQuick 2.0
@@ -259,12 +259,12 @@ Rectangle {
 }
 ```
 
-## 6.5.4 性能协调（Tunning Performance）
+## 6.5.4 性能協調（Tunning Performance）
 
-一个模型视图的性能很大程度上依赖于代理的创建。例如滚动下拉一个链表视图时，代理从外部加入到视图底部，并且从视图顶部移出。如果设置剪裁（clip）属性为false，并且代理项花了很多时间来初始化，用户会感觉到视图滚动体验很差。
+一個模型視圖的性能很大程度上依賴于代理的創建。例如滾動下拉一個鏈表視圖時，代理從外部加入到視圖底部，並且從視圖頂部移出。如果設置剪裁（clip）屬性為false，並且代理項花了很多時間來初始化，用戶會感覺到視圖滾動體驗很差。
 
-为了优化这个问题，你可以在滚动时使用像素来调整。使用cacheBuffer属性，在上诉情况下的垂直滚动，它将会调整在链表视图的上下需要预先准备好多少像素的代理项，结合异步加载图像元素（Image），例如在它们进入视图之前加载。
+為了優化這個問題，你可以在滾動時使用像素來調整。使用cacheBuffer屬性，在上訴情況下的垂直滾動，它將會調整在鏈表視圖的上下需要預先準備好多少像素的代理項，結合異步加載圖像元素（Image），例如在它們進入視圖之前加載。
 
-创建更多的代理项将会牺牲一些流畅的体验，并且花更多的时间来初始化每个代理。这并不代表可以解决一些更加复杂的代理项的问题。在每次实例化代理时，它的内容都会被评估和编辑。这需要花费时间，如果它花费了太多的时间，它将会导致一个很差的滚动体验。在一个代理中包含太多的元素也会降低滚动的性能。
+創建更多的代理項將會犧牲一些流暢的體驗，並且花更多的時間來初始化每個代理。這並不代表可以解決一些更加復雜的代理項的問題。在每次實例化代理時，它的內容都會被評估和編輯。這需要花費時間，如果它花費了太多的時間，它將會導致一個很差的滾動體驗。在一個代理中包含太多的元素也會降低滾動的性能。
 
-为了补救这个问题，我们推荐使用动态加载元素。当它们需要时，可以初始化这些附加的元素。例如，一个展开代理可能推迟它的详细内容的实例化，直到需要使用它时。每个代理中最好减少JavaScript的数量。将每个代理中复杂的JavaScript调用放在外面来实现。这将会减少每个代理在创建时编译JavaScript。
+為了補救這個問題，我們推薦使用動態加載元素。當它們需要時，可以初始化這些附加的元素。例如，一個展開代理可能推遲它的詳細內容的實例化，直到需要使用它時。每個代理中最好減少JavaScript的數量。將每個代理中復雜的JavaScript調用放在外面來實現。這將會減少每個代理在創建時編譯JavaScript。

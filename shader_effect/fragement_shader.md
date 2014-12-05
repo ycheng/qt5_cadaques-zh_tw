@@ -1,10 +1,10 @@
-# 片段着色器（Fragement Shader）
+# 片段著色器（Fragement Shader）
 
-片段着色器调用每个需要渲染的像素。我们将开发一个红色透镜，它将会增加图片的红色通道的值。
+片段著色器調用每個需要渲染的像素。我們將開發一個紅色透鏡，它將會增加圖片的紅色通道的值。
 
-**配置场景（Setting up the scene）**
+**配置場景（Setting up the scene）**
 
-首先我们配置我们的场景，在区域中央使用一个网格显示我们的源图片（source image）。
+首先我們配置我們的場景，在區域中央使用一個網格顯示我們的源圖片（source image）。
 
 ```
 import QtQuick 2.0
@@ -28,9 +28,9 @@ Rectangle {
 
 ![](http://qmlbook.org/_images/redlense1.png)
 
-**红色着色器（A red Shader）**
+**紅色著色器（A red Shader）**
 
-下一步我们添加一个着色器，显示一个红色矩形框。由于我们不需要纹理，我们从顶点着色器中移除纹理。
+下一步我們添加一個著色器，顯示一個紅色矩形框。由于我們不需要紋理，我們從頂點著色器中移除紋理。
 
 ```
             vertexShader: "
@@ -46,13 +46,13 @@ Rectangle {
                 }"
 ```
 
-在片段着色器中，我们简单的给gl_FragColor赋值为vec4(1.0, 0.0, 0.0, 1.0)，它代表红色， 并且不透明（alpha=1.0）。
+在片段著色器中，我們簡單的給gl_FragColor賦值為vec4(1.0, 0.0, 0.0, 1.0)，它代表紅色， 並且不透明（alpha=1.0）。
 
 ![](http://qmlbook.org/_images/redlense2.png)
 
-**使用纹理的红色着色器（A red shader with texture）**
+**使用紋理的紅色著色器（A red shader with texture）**
 
-现在我们想要将这个红色应用在纹理的每个像素上。我们需要将纹理加回顶点着色器。由于我们不再在顶点着色器中做任何其它的事情，所以默认的顶点着色器已经满足我们的要求。
+現在我們想要將這個紅色應用在紋理的每個像素上。我們需要將紋理加回頂點著色器。由于我們不再在頂點著色器中做任何其它的事情，所以默認的頂點著色器已經滿足我們的要求。
 
 ```
         ShaderEffect {
@@ -70,15 +70,15 @@ Rectangle {
         }
 ```
 
-完整的着色器重新包含我们的源图片作为属性，由于我们没有特殊指定，使用默认的顶点着色器，我没有重写顶点着色器。
+完整的著色器重新包含我們的源圖片作為屬性，由于我們沒有特殊指定，使用默認的頂點著色器，我沒有重寫頂點著色器。
 
-在片段着色器中，我们提取纹理片段texture2D(source,qt_TexCoord0)，并且与红色一起应用。
+在片段著色器中，我們提取紋理片段texture2D(source,qt_TexCoord0)，並且與紅色一起應用。
 
 ![](http://qmlbook.org/_images/redlense3.png)
 
-**红色通道属性（The red channel property）**
+**紅色通道屬性（The red channel property）**
 
-这样的代码用来修改红色通道的值看起来不是很好，所以我们想要将这个值包含在QML这边。我们在ShaderEffect中增加一个redChannel属性，并在我们的片段着色器中申明一个uniform lowpfloat redChannel。这就是从一个着色器代码中标记一个值到QML这边的方法，非常简单。
+這樣的代碼用來修改紅色通道的值看起來不是很好，所以我們想要將這個值包含在QML這邊。我們在ShaderEffect中增加一個redChannel屬性，並在我們的片段著色器中申明一個uniform lowpfloat redChannel。這就是從一個著色器代碼中標記一個值到QML這邊的方法，非常簡單。
 
 ```
         ShaderEffect {
@@ -98,13 +98,13 @@ Rectangle {
         }
 ```
 
-为了让这个透镜更真实，我们改变vec4颜色为vec4(redChannel, 1.0, 1.0, 1.0)，这样其它颜色与1.0相乘，只有红色部分使用我们的redChannel变量。
+為了讓這個透鏡更真實，我們改變vec4顏色為vec4(redChannel, 1.0, 1.0, 1.0)，這樣其它顏色與1.0相乘，只有紅色部分使用我們的redChannel變量。
 
 ![](http://qmlbook.org/_images/redlense4.png)
 
-**红色通道的动画（The red channel animated**）
+**紅色通道的動畫（The red channel animated**）
 
-由于redChannel属性仅仅是一个正常的属性，我们也可以像其它QML中的属性一样使用动画。我们使用QML属性在GPU上改变这个值，来影响我们的着色器，这真酷！
+由于redChannel屬性僅僅是一個正常的屬性，我們也可以像其它QML中的屬性一樣使用動畫。我們使用QML屬性在GPU上改變這個值，來影響我們的著色器，這真酷！
 
 ```
         ShaderEffect {
@@ -128,8 +128,8 @@ Rectangle {
         }
 ```
 
-下面是最后的结果。
+下面是最後的結果。
 
 ![](http://qmlbook.org/_images/redlense5.png)
 
-在这4秒内，第二排的着色器红色通道的值从0.0到1.0。图片从没有红色信息（0.0 red）到一个正常的图片（1.0 red）。
+在這4秒內，第二排的著色器紅色通道的值從0.0到1.0。圖片從沒有紅色信息（0.0 red）到一個正常的圖片（1.0 red）。
