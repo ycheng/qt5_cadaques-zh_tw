@@ -17,4 +17,5 @@ sed -e s/訪問/存取/g | \
 sed -e s/接口/介面/g | \
 sed -e s/反饋/回饋/g | \
 sed -e s/質量/品質/g | \
+sed -e s/聯系人/聯絡人/g | \
 cat

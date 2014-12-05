@@ -1,0 +1,3 @@
+mv $1 $1.orig
+iconv -f utf8 -t gb2312 $1.orig | iconv -f gb2312 -t big5 | iconv -f big5 -t utf8 > $1
+
