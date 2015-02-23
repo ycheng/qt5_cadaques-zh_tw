@@ -1,6 +1,6 @@
-# 通过HTTP服务UI（Serving UI via HTTP）
+# 通過HTTP服務UI（Serving UI via HTTP）
 
-通过HTTP加载一个简单的用户界面，我们需要一个web服务器，它为UI文件服务。但是首先我们需要有用户界面，我们在项目里创建一个创建了红色矩形框的main.qml。
+通過HTTP加載一個簡單的用戶界面，我們需要一個web服務器，它為UI文件服務。但是首先我們需要有用戶界面，我們在項目裡創建一個創建了紅色矩形框的main.qml。
 
 ```
 // main.qml
@@ -13,20 +13,20 @@ Rectangle {
 }
 ```
 
-我们加载一段python脚本来提供这个文件：
+我們加載一段python腳本來提供這個文件：
 
 ```
 $ cd <PROJECT>
 # python -m SimpleHTTPServer 8080
 ```
 
-现在我们可以通过[http://localhost:8000/main.qml](http://localhost:8000/main.qml)来访问，你可以像下面这样测试：
+現在我們可以通過[http://localhost:8000/main.qml](http://localhost:8000/main.qml)來訪問，你可以像下面這樣測試：
 
 ```
 $ curl http://localhost:8000/main.qml
 ```
 
-或者你可以用浏览器来访问。浏览器无法识别QML，并且无法通过文档来渲染。我们需要创建一个可以浏览QML文档的浏览器。为了渲染文档，我们需要指出qmlscene的位置。不幸的是qmlscene只能读取本地文件。我们为了突破这个限制，我们可以使用自己写的qmlscene或者使用QML动态加载。我们选择动态加载的方式。我们选择一个加载元素来加载远程的文档。
+或者你可以用瀏覽器來訪問。瀏覽器無法識別QML，並且無法通過文檔來渲染。我們需要創建一個可以瀏覽QML文檔的瀏覽器。為了渲染文檔，我們需要指出qmlscene的位置。不幸的是qmlscene只能讀取本地文件。我們為了突破這個限制，我們可以使用自己寫的qmlscene或者使用QML動態加載。我們選擇動態加載的方式。我們選擇一個加載元素來加載遠程的文檔。
 
 ```
 // remote.qml
@@ -42,17 +42,17 @@ Loader {
 }
 ```
 
-我们现在可以使用qmlscene来加载remote.qml文档。这里仍然有一个小问题。加载器将会调整加载项的大小。我们的qmlscene需要适配大小。可以使用--resize-to-root选项来运行qmlscene。
+我們現在可以使用qmlscene來加載remote.qml文檔。這裡仍然有一個小問題。加載器將會調整加載項的大小。我們的qmlscene需要適配大小。可以使用--resize-to-root選項來運行qmlscene。
 
 ```
 $ qmlscene --resize-to-root remote.qml
 ```
 
-按照root元素调整大小，告诉qmlscene按照root元素的大小调它的窗口大小。remote现在从本地服务器加载main.qml，并且可以自动调整加载的用户界面。方便且简单。
+按照root元素調整大小，告訴qmlscene按照root元素的大小調它的窗口大小。remote現在從本地服務器加載main.qml，並且可以自動調整加載的用戶界面。方便且簡單。
 
 **注意**
 
-**如果你不想使用一个本地服务器，你可以使用来自GitHub的gist服务。Gist是一个在线剪切板服务，就像PasteBin等等。可以在[https://gist.github.com](https://gist.github.com )下使用。我创建了一个简单的gist例子，地址是[https://gist.github.com/jryannel/7983492](https://gist.github.com/jryannel/7983492)。这将会返回一个绿色矩形框。由于gist连接提供的是HTML代码，我们需要连接一个/raw来读取原始文件而不是HTML代码。**
+**如果你不想使用一個本地服務器，你可以使用來自GitHub的gist服務。Gist是一個在線剪切板服務，就像PasteBin等等。可以在[https://gist.github.com](https://gist.github.com )下使用。我創建了一個簡單的gist例子，地址是[https://gist.github.com/jryannel/7983492](https://gist.github.com/jryannel/7983492)。這將會返回一個綠色矩形框。由于gist連接提供的是HTML代碼，我們需要連接一個/raw來讀取原始文件而不是HTML代碼。**
 
 ```
 // remote.qml
@@ -68,18 +68,18 @@ Loader {
 }
 ```
 
-从网络加载另一个文件，你只需要引用组件名。例如一个Button.qml，只要它们在同一个远程文件夹下就能够像正常一样访问。
+從網絡加載另一個文件，你只需要引用組件名。例如一個Button.qml，只要它們在同一個遠程文件夾下就能夠像正常一樣訪問。
 
-## 11.1.1 网络组件（Networked Components）
+## 11.1.1 網絡組件（Networked Components）
 
-我们做了一个小实验。我们在远程端添加一个按钮作为可以复用的组件。
+我們做了一個小實驗。我們在遠程端添加一個按鈕作為可以復用的組件。
 
 ```
 - src/main.qml
 - src/Button.qml
 ```
 
-我们修改main.qml来使用button：
+我們修改main.qml來使用button：
 
 ```
 import QtQuick 2.0
@@ -97,26 +97,26 @@ Rectangle {
 }
 ```
 
-再次加载我们的web服务器：
+再次加載我們的web服務器：
 
 ```
 $ cd src
 # python -m SimpleHTTPServer 8080
 ```
 
-再次使用http加载远mainQML文件：
+再次使用http加載遠mainQML文件：
 
 ```
 $ qmlscene --resize-to-root remote.qml
 ```
 
-我们看到一个错误：
+我們看到一個錯誤：
 
 ```
 http://localhost:8080/main2.qml:11:5: Button is not a type
 ```
 
-所以，在远程加载时，QML无法解决Button组件的问题。如果代码使用本地加载qmlscene src/main.qml，将不会有问题。Qt能够直接解析本地文件，并且检测哪些组件可用，但是使用http的远程访问没有“list-dir”函数。我们可以在main.qml中使用import声明来强制QML加载元素：
+所以，在遠程加載時，QML無法解決Button組件的問題。如果代碼使用本地加載qmlscene src/main.qml，將不會有問題。Qt能夠直接解析本地文件，並且檢測哪些組件可用，但是使用http的遠程訪問沒有“list-dir”函數。我們可以在main.qml中使用import聲明來強制QML加載元素：
 
 ```
 import "http://localhost:8080" as Remote
@@ -126,13 +126,13 @@ import "http://localhost:8080" as Remote
 Remote.Button { ... }
 ```
 
-再次运行qmlscene后，它将正常工作：
+再次運行qmlscene後，它將正常工作：
 
 ```
 $ qmlscene --resize-to-root remote.qml
 ```
 
-这是完整的代码：
+這是完整的代碼：
 
 ```
 // main2.qml
@@ -152,14 +152,14 @@ Rectangle {
 }
 ```
 
-一个更好的选择是在服务器端使用qmldir文件来控制输出：
+一個更好的選擇是在服務器端使用qmldir文件來控制輸出：
 
 ```
 // qmldir
 Button 1.0 Button.qml
 ```
 
-然后更新main.qml：
+然後更新main.qml：
 
 ```
 import "http://localhost:8080" 1.0 as Remote
@@ -169,4 +169,4 @@ import "http://localhost:8080" 1.0 as Remote
 Remote.Button { ... }
 ```
 
-当从本地文件系统使用组件时，它们的创建没有延迟。当组件通过网络加载时，它们的创建是异步的。创建时间的影响是未知的，当其它组件已经完成时，一个组件可能还没有完成加载。当通过网络加载组件时，需要考虑这些。
+當從本地文件系統使用組件時，它們的創建沒有延遲。當組件通過網絡加載時，它們的創建是異步的。創建時間的影響是未知的，當其它組件已經完成時，一個組件可能還沒有完成加載。當通過網絡加載組件時，需要考慮這些。

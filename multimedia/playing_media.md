@@ -1,10 +1,10 @@
-# 媒体播放（Playing Media）
+# 媒體播放（Playing Media）
 
-在QML应用程序中，最基本的媒体应用是播放媒体。使用MediaPlayer元素可以完成它，如果源是一个图片或者视频，可以选择结合VideoOutput元素。MediaPlayer元素有一个source属性指向需要播放的媒体。当媒体源被绑定后，简单的调用play函数就可以开始播放。
+在QML應用程序中，最基本的媒體應用是播放媒體。使用MediaPlayer元素可以完成它，如果源是一個圖片或者視頻，可以選擇結合VideoOutput元素。MediaPlayer元素有一個source屬性指向需要播放的媒體。當媒體源被綁定後，簡單的調用play函數就可以開始播放。
 
-如果你想播放一个可视化的媒体，例如图片或者视频等，你需要配置一个VideoOutput元素。MediaPlayer播放通过source属性与视频输出绑定。
+如果你想播放一個可視化的媒體，例如圖片或者視頻等，你需要配置一個VideoOutput元素。MediaPlayer播放通過source屬性與視頻輸出綁定。
 
-在下面的例子中，给MediaPlayer元素一个视频文件作为source。一个VideoOutput被创建和绑定到媒体播放器上。一旦主要部件完全初始化，例如在Component.onCompleted中，播放器的play函数被调用。
+在下面的例子中，給MediaPlayer元素一個視頻文件作為source。一個VideoOutput被創建和綁定到媒體播放器上。一旦主要部件完全初始化，例如在Component.onCompleted中，播放器的play函數被調用。
 
 ```
 import QtQuick 2.0
@@ -36,9 +36,9 @@ Item {
 // M1>>
 ```
 
-除了上面介绍的视频播放，这个例子也包括了一小段代码用于禁止屏幕保护。这将阻止视频被中断。通过设置ScreenSaver元素的screenSaverEnabled属性为false来完成。通过导入QtSystemInfo 5.0可以使用ScreenSaver元素。
+除了上面介紹的視頻播放，這個例子也包括了一小段代碼用于禁止屏幕保護。這將阻止視頻被中斷。通過設置ScreenSaver元素的screenSaverEnabled屬性為false來完成。通過導入QtSystemInfo 5.0可以使用ScreenSaver元素。
 
-基础操作例如当播放媒体时可以通过MediaPlayer元素的volume属性来控制音量。还有一些其它有用的属性。例如，duration与position属性可以用来创建一个进度条。如果seekable属性为true，当拨动进度条时可以更新position属性。下面这个例子展示了在上面的例子基础上如何添加基础播放。
+基礎操作例如當播放媒體時可以通過MediaPlayer元素的volume屬性來控制音量。還有一些其它有用的屬性。例如，duration與position屬性可以用來創建一個進度條。如果seekable屬性為true，當撥動進度條時可以更新position屬性。下面這個例子展示了在上面的例子基礎上如何添加基礎播放。
 
 ```
     Rectangle {
@@ -74,7 +74,7 @@ Item {
     }
 ```
 
-默认情况下position属性每秒更新一次。这意味着进度条将只会在大跨度下的时间周期下才会更新，需要媒体持续时间足够长，进度条像素足够宽。然而，这个可以通过mediaObject属性的notifyInterval属性改变。它可以设置每个position之间更新的毫秒数，增加用户界面的平滑度。
+默認情況下position屬性每秒更新一次。這意味著進度條將只會在大跨度下的時間週期下才會更新，需要媒體持續時間足夠長，進度條像素足夠寬。然而，這個可以通過mediaObject屬性的notifyInterval屬性改變。它可以設置每個position之間更新的毫秒數，增加用戶界面的平滑度。
 
 ```
     Connections {
@@ -86,28 +86,28 @@ Item {
     }
 ```
 
-当使用MediaPlayer创建一个媒体播放器时，最好使用status属性来监听播放器。这个属性是一个枚举，它枚举了播放器可能出现的状态，从MediaPlayer.Buffered到MediaPlayer.InvalidMedia。下面是这些状态值的总结：
+當使用MediaPlayer創建一個媒體播放器時，最好使用status屬性來監聽播放器。這個屬性是一個枚舉，它枚舉了播放器可能出現的狀態，從MediaPlayer.Buffered到MediaPlayer.InvalidMedia。下面是這些狀態值的總結：
 
-* MediaPlayer.UnknownStatus - 未知状态
+* MediaPlayer.UnknownStatus - 未知狀態
 
-* MediaPlayer.NoMedia - 播放器没有指定媒体资源，播放停止
+* MediaPlayer.NoMedia - 播放器沒有指定媒體資源，播放停止
 
-* MediaPlayer.Loading - 播放器正在加载媒体
+* MediaPlayer.Loading - 播放器正在加載媒體
 
-* MediaPlayer.Loaded - 媒体已经加载完毕，播放停止
+* MediaPlayer.Loaded - 媒體已經加載完畢，播放停止
 
-* MediaPlayer.Stalled - 加载媒体已经停止
+* MediaPlayer.Stalled - 加載媒體已經停止
 
-* MediaPlayer.Buffering - 媒体正在缓冲
+* MediaPlayer.Buffering - 媒體正在緩衝
 
-* MediaPlayer.Buffered - 媒体缓冲完成
+* MediaPlayer.Buffered - 媒體緩衝完成
 
-* MediaPlayer.EndOfMedia - 媒体播放完毕，播放停止
+* MediaPlayer.EndOfMedia - 媒體播放完畢，播放停止
 
-* MediaPlayer.InvalidMedia - 无法播放媒体，播放停止
+* MediaPlayer.InvalidMedia - 無法播放媒體，播放停止
 
-正如上面提到的这些枚举项，播放状态会随着时间变化。调用play，pause或者stop将会切换状态，但由于媒体的原因也会影响这些状态。例如，媒体播放完毕，它将会无效，导致播放停止。当前的播放状态可以使用playbackState属性跟踪。这个值可能是MediaPlayer.PlayingState，MediaPlayer.PasuedState或者MediaPlayer.StoppedState。
+正如上面提到的這些枚舉項，播放狀態會隨著時間變化。調用play，pause或者stop將會切換狀態，但由于媒體的原因也會影響這些狀態。例如，媒體播放完畢，它將會無效，導致播放停止。當前的播放狀態可以使用playbackState屬性跟蹤。這個值可能是MediaPlayer.PlayingState，MediaPlayer.PasuedState或者MediaPlayer.StoppedState。
 
-使用autoPlay属性，MediaPlayer在source属性改变时将会尝试进入播放状态。类似的属性autoLoad将会导致播放器在source属性改变时尝试加载媒体。默认下autoLoad是被允许的。
+使用autoPlay屬性，MediaPlayer在source屬性改變時將會嘗試進入播放狀態。類似的屬性autoLoad將會導致播放器在source屬性改變時嘗試加載媒體。默認下autoLoad是被允許的。
 
-当然也可以让MediaPlayer循环播放一个媒体项。loops属性控制source将会被重复播放多少次。设置属性为MediaPlayer.Infinite将会导致不停的重播。非常适合持续的动画或者一个重复的背景音乐。
+當然也可以讓MediaPlayer循環播放一個媒體項。loops屬性控制source將會被重復播放多少次。設置屬性為MediaPlayer.Infinite將會導致不停的重播。非常適合持續的動畫或者一個重復的背景音樂。

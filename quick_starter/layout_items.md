@@ -1,10 +1,10 @@
 # 布局元素（Layout Items）
 
-QML使用anchors（锚）对元素进行布局。anchoring（锚定）是基础元素对象的基本属性，可以被所有的可视化QML元素使用。一个anchors（锚）就像一个协议，并且比几何变化更加强大。Anchors（锚）是相对关系的表达式，你通常需要与其它元素搭配使用。
+QML使用anchors（錨）對元素進行布局。anchoring（錨定）是基礎元素對象的基本屬性，可以被所有的可視化QML元素使用。一個anchors（錨）就像一個協議，並且比幾何變化更加強大。Anchors（錨）是相對關系的表達式，你通常需要與其它元素搭配使用。
 
 ![](http://qmlbook.org/_images/anchors.png)
 
-一个元素有6条锚定线（top顶，bottom底，left左，right右，horizontalCenter水平中，verticalCenter垂直中）。在文本元素（Text Element）中有一条文本的锚定基线（baseline）。每一条锚定线都有一个偏移（offset）值，在top（顶），bottom（底），left（左），right（右）的锚定线中它们也被称作边距。对于horizontalCenter（水平中）与verticalCenter（垂直中）与baseline（文本基线）中被称作偏移值。
+一個元素有6條錨定線（top頂，bottom底，left左，right右，horizontalCenter水平中，verticalCenter垂直中）。在文本元素（Text Element）中有一條文本的錨定基線（baseline）。每一條錨定線都有一個偏移（offset）值，在top（頂），bottom（底），left（左），right（右）的錨定線中它們也被稱作邊距。對于horizontalCenter（水平中）與verticalCenter（垂直中）與baseline（文本基線）中被稱作偏移值。
 
 ![](http://qmlbook.org/_images/anchorgrid.png)
 
@@ -20,7 +20,7 @@ QML使用anchors（锚）对元素进行布局。anchoring（锚定）是基础�
         }
 ```
 
-2. 元素左对齐它的父元素。
+2. 元素左對齊它的父元素。
 ```
         GreenSquare {
             BlueSquare {
@@ -33,7 +33,7 @@ QML使用anchors（锚）对元素进行布局。anchoring（锚定）是基础�
         }
 ```
 
-3. 元素的左边与它父元素的右边对齐。
+3. 元素的左邊與它父元素的右邊對齊。
 ```
         GreenSquare {
             BlueSquare {
@@ -44,7 +44,7 @@ QML使用anchors（锚）对元素进行布局。anchoring（锚定）是基础�
         }
 ```
 
-4. 元素中间对齐。Blue1与它的父元素水平中间对齐。Blue2与Blue1中间对齐，并且它的顶部对齐Blue1的底部。
+4. 元素中間對齊。Blue1與它的父元素水平中間對齊。Blue2與Blue1中間對齊，並且它的頂部對齊Blue1的底部。
 ```
         GreenSquare {
             BlueSquare {
@@ -75,7 +75,7 @@ QML使用anchors（锚）对元素进行布局。anchoring（锚定）是基础�
         }
 ```
 
-6. 元素水平方向居中对齐父元素并向后偏移12像素，垂直方向居中对齐。
+6. 元素水平方向居中對齊父元素並向後偏移12像素，垂直方向居中對齊。
 ```
         GreenSquare {
             BlueSquare {
@@ -90,4 +90,4 @@ QML使用anchors（锚）对元素进行布局。anchoring（锚定）是基础�
 
 **注意**
 
-**我们的方格都打开了拖拽。试着拖放几个方格。你可以发现第一个方格无法被拖拽因为它每个边都被固定了，当然第一个方格的父元素能够被拖拽是因为它的父元素没有被固定。第二个方格能够在垂直方向上拖拽是因为它只有左边被固定了。类似的第三个和第四个方格也只能在垂直方向上拖拽是因为它们都使用水平居中对齐。第五个方格使用居中布局，它也无法被移动，第六个方格与第五个方格类似。拖拽一个元素意味着会改变它的x,y坐标。anchoring（锚定）比几何变化（例如x,y坐标变化）更强大是因为锚定线（anchored lines）的限制，我们将在后面讨论动画时看到这些功能的强大。**
+**我們的方格都打開了拖拽。試著拖放幾個方格。你可以發現第一個方格無法被拖拽因為它每個邊都被固定了，當然第一個方格的父元素能夠被拖拽是因為它的父元素沒有被固定。第二個方格能夠在垂直方向上拖拽是因為它只有左邊被固定了。類似的第三個和第四個方格也只能在垂直方向上拖拽是因為它們都使用水平居中對齊。第五個方格使用居中布局，它也無法被移動，第六個方格與第五個方格類似。拖拽一個元素意味著會改變它的x,y坐標。anchoring（錨定）比幾何變化（例如x,y坐標變化）更強大是因為錨定線（anchored lines）的限制，我們將在後面討論動畫時看到這些功能的強大。**

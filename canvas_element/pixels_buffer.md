@@ -1,8 +1,8 @@
-# 像素缓冲（Pixels Buffer）
+# 像素緩衝（Pixels Buffer）
 
-当你使用画布时，你可以检索读取画布上的像素数据，或者操作画布上的像素。读取图像数据使用createImageData(sw,sh)或者getImageData(sx,sy,sw,sh)。这两个函数都会返回一个包含宽度（width），高度（height）和数据（data）的图像数据（ImageData）对象。图像数据包含了一维数组像素数据，使用RGBA格式进行检索。每个数据的数据范围在0到255之间。设置画布的像素数据你可以使用putImageData(imagedata,dx,dy)函数来完成。
+當你使用畫布時，你可以檢索讀取畫布上的像素數據，或者操作畫布上的像素。讀取圖像數據使用createImageData(sw,sh)或者getImageData(sx,sy,sw,sh)。這兩個函數都會返回一個包含寬度（width），高度（height）和數據（data）的圖像數據（ImageData）對象。圖像數據包含了一維數組像素數據，使用RGBA格式進行檢索。每個數據的數據範圍在0到255之間。設置畫布的像素數據你可以使用putImageData(imagedata,dx,dy)函數來完成。
 
-另一种检索画布内容的方法是将画布的数据存储进一张图片中。可以使用画布的函数save(path)或者toDataURL(mimeType)来完成，toDataURL(mimeType)会返回一个图片的地址，这个链接可以直接用Image元素来读取。
+另一種檢索畫布內容的方法是將畫布的數據存儲進一張圖片中。可以使用畫布的函數save(path)或者toDataURL(mimeType)來完成，toDataURL(mimeType)會返回一個圖片的地址，這個鏈接可以直接用Image元素來讀取。
 
 ```
 import QtQuick 2.0
@@ -54,8 +54,8 @@ Rectangle {
 }
 ```
 
-在我们这个例子中，我们每秒在左边的画布中绘制一个的圆形。当使用鼠标点击画布内容时，会将内容存储为一个图片链接。在右边将会展示这个存储的图片。
+在我們這個例子中，我們每秒在左邊的畫布中繪制一個的圓形。當使用鼠標點擊畫布內容時，會將內容存儲為一個圖片鏈接。在右邊將會展示這個存儲的圖片。
 
 **注意**
 
-**在Qt5的Alpha版本中，检索图像数据似乎不能工作。**
+**在Qt5的Alpha版本中，檢索圖像數據似乎不能工作。**

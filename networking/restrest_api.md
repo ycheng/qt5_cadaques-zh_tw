@@ -1,8 +1,8 @@
 # REST接口（REST API）
 
-为了使用web服务，我们首先需要创建它。我们使用Flask（http://flask.pocoo.org），一个基于python创建简单的颜色web服务的HTTP服务器应用。你也可以使用其它的web服务器，只要它接收和返回JSON数据。通过web服务来管理一组已经命名的颜色。在这个例子中，管理意味着CRUD（创建-读取-更新-删除）。
+為了使用web服務，我們首先需要創建它。我們使用Flask（http://flask.pocoo.org），一個基于python創建簡單的顏色web服務的HTTP服務器應用。你也可以使用其它的web服務器，只要它接收和返回JSON數據。通過web服務來管理一組已經命名的顏色。在這個例子中，管理意味著CRUD（創建-讀取-更新-刪除）。
 
-在Flask中一个简单的web服务可以写入一个文件。我们使用一个空的服务器.py文件开始，在这个文件中我们创建一些规则并且从额外的JSON文件中加载初始颜色。你可以查看Flask文档获取更多的帮助。
+在Flask中一個簡單的web服務可以寫入一個文件。我們使用一個空的服務器.py文件開始，在這個文件中我們創建一些規則並且從額外的JSON文件中加載初始顏色。你可以查看Flask文檔獲取更多的幫助。
 
 ```
 from flask import Flask, jsonify, request
@@ -18,13 +18,13 @@ if __name__ == '__main__':
     app.run(debug = True)
 ```
 
-当你运行这个脚本后，它会在http://localhost:5000。
+當你運行這個腳本後，它會在http://localhost:5000。
 
-我们开始添加我们的CRUD（创建，读取，更新，删除）到我们的web服务。
+我們開始添加我們的CRUD（創建，讀取，更新，刪除）到我們的web服務。
 
-## 11.5.1 读取请求（Read Request）
+## 11.5.1 讀取請求（Read Request）
 
-从web服务读取数据，我们提供GET方法来读取所有的颜色。
+從web服務讀取數據，我們提供GET方法來讀取所有的顏色。
 
 ```
 @app.route('/colors', methods = ['GET'])
@@ -32,17 +32,17 @@ def get_colors():
     return jsonify( { "colors" :  colors })
 ```
 
-这将会返回‘/colors’下的颜色。我们使用curl来创建一个http请求测试。
+這將會返回‘/colors’下的顏色。我們使用curl來創建一個http請求測試。
 
 ```
 curl -i -GET http://localhost:5000/colors
 ```
 
-这将会返回给我们JSON数据的颜色链表。
+這將會返回給我們JSON數據的顏色鏈表。
 
-## 11.5.2 读取接口（Read Entry）
+## 11.5.2 讀取接口（Read Entry）
 
-为了通过名字读取颜色，我们提供更加详细的后缀，定位在‘/colors/'下。名称是后缀的参数，用来识别一个独立的颜色。
+為了通過名字讀取顏色，我們提供更加詳細的後綴，定位在‘/colors/'下。名稱是後綴的參數，用來識別一個獨立的顏色。
 
 ```
 @app.route('/colors/<name>', methods = ['GET'])
@@ -52,17 +52,17 @@ def get_color(name):
             return jsonify( color )
 ```
 
-我们再次使用curl测试，例如获取一个红色的接口。
+我們再次使用curl測試，例如獲取一個紅色的接口。
 
 ```
 curl -i -GET http://localhost:5000/colors/red
 ```
 
-这将返回一个JSON数据的颜色。
+這將返回一個JSON數據的顏色。
 
-## 11.5.3 创建接口（Create Entry）
+## 11.5.3 創建接口（Create Entry）
 
-目前我们仅仅使用了HTTP GET方法。为了在服务器端创建一个接口，我们使用POST方法，并且将新的颜色信息发使用POST数据发送。后缀与获取所有颜色相同，但是我们需要使用一个POST请求。
+目前我們僅僅使用了HTTP GET方法。為了在服務器端創建一個接口，我們使用POST方法，並且將新的顏色信息發使用POST數據發送。後綴與獲取所有顏色相同，但是我們需要使用一個POST請求。
 
 ```
 @app.route('/colors', methods= ['POST'])
@@ -75,7 +75,7 @@ def create_color():
     return jsonify( color ), 201
 ```
 
-curl非常灵活，允许我们使用JSON数据作为新的接口包含在POST请求中。
+curl非常靈活，允許我們使用JSON數據作為新的接口包含在POST請求中。
 
 ```
 curl -i -H "Content-Type: application/json" -X POST -d '{"name":"gray1","value":"#333"}' http://localhost:5000/colors
@@ -83,7 +83,7 @@ curl -i -H "Content-Type: application/json" -X POST -d '{"name":"gray1","value":
 
 ## 11.5.4 更新接口（Update Entry）
 
-我们使用PUT HTTP方法来添加新的update接口。后缀与取得一个颜色接口相同。当颜色更新后，我们获取更新后JSON数据的颜色。
+我們使用PUT HTTP方法來添加新的update接口。後綴與取得一個顏色接口相同。當顏色更新後，我們獲取更新後JSON數據的顏色。
 
 ```
 @app.route('/colors/<name>', methods= ['PUT'])
@@ -94,15 +94,15 @@ def update_color(name):
             return jsonify( color )
 ```
 
-在curl请求中，我们用JSON数据来定义更新值，后缀名用来识别哪个颜色需要更新。
+在curl請求中，我們用JSON數據來定義更新值，後綴名用來識別哪個顏色需要更新。
 
 ```
 curl -i -H "Content-Type: application/json" -X PUT -d '{"value":"#666"}' http://localhost:5000/colors/red
 ```
 
-## 11.5.5 删除接口（Delete Entry）
+## 11.5.5 刪除接口（Delete Entry）
 
-使用DELETE HTTP来完成删除接口。使用与颜色相同的后缀，但是使用DELETE HTTP方法。
+使用DELETE HTTP來完成刪除接口。使用與顏色相同的後綴，但是使用DELETE HTTP方法。
 
 ```
 @app.route('/colors/<name>', methods=['DELETE'])
@@ -115,39 +115,39 @@ def delete_color(name):
     return jsonify( { 'result' : success } )
 ```
 
-这个请求看起来与GET请求一个颜色类似。
+這個請求看起來與GET請求一個顏色類似。
 
 ```
 curl -i -X DELETE http://localhost:5000/colors/red
 ```
 
-现在我们能够读取所有颜色，读取指定颜色，创建新的颜色，更新颜色和删除颜色。我们知道使用HTTP后缀来访问我们的接口。
+現在我們能夠讀取所有顏色，讀取指定顏色，創建新的顏色，更新顏色和刪除顏色。我們知道使用HTTP後綴來訪問我們的接口。
 
-| 动作 | HTTP协议 | 后缀  |
+| 動作 | HTTP協議 | 後綴  |
 | -- | -- | -- |
-| 读取所有 | GET | http://localhost:5000/colors   |
-| 创建接口 | POST | http://localhost:5000/colors  |
-| 读取接口 | GET | http://localhost:5000/colors/name |
+| 讀取所有 | GET | http://localhost:5000/colors   |
+| 創建接口 | POST | http://localhost:5000/colors  |
+| 讀取接口 | GET | http://localhost:5000/colors/name |
 | 更新接口 | PUT | http://localhost:5000/colors/name |
-| 删除接口 | DELETE  | http://localhost:500/colors/name |
+| 刪除接口 | DELETE  | http://localhost:500/colors/name |
 
-REST服务已经完成，我们现在只需要关注QML和客户端。为了创建一个简单好用的接口，我们需要映射每个动作为一个独立的HTTP请求，并且给我们的用户提供一个简单的接口。
+REST服務已經完成，我們現在只需要關注QML和客戶端。為了創建一個簡單好用的接口，我們需要映射每個動作為一個獨立的HTTP請求，並且給我們的用戶提供一個簡單的接口。
 
-## 11.5.6 REST客户端（REST Client）
+## 11.5.6 REST客戶端（REST Client）
 
-为了展示REST客户端，我们写了一个小的颜色表格。这个颜色表格显示了通过HTTP请求从web服务取得的颜色。我们的用户界面提供以下命令：
+為了展示REST客戶端，我們寫了一個小的顏色表格。這個顏色表格顯示了通過HTTP請求從web服務取得的顏色。我們的用戶界面提供以下命令：
 
-* 获取颜色链表
+* 獲取顏色鏈表
 
-* 创建颜色
+* 創建顏色
 
-* 读取最后的颜色
+* 讀取最後的顏色
 
-* 更新最后的颜色
+* 更新最後的顏色
 
-* 删除最后的颜色
+* 刪除最後的顏色
 
-我们将我们的接口包装在一个JS文件中，叫做colorservice.js，并将它导入到我们的UI中作为服务（Service）。在服务模块中，我们创建了帮助函数来为我们构造HTTP请求：
+我們將我們的接口包裝在一個JS文件中，叫做colorservice.js，並將它導入到我們的UI中作為服務（Service）。在服務模塊中，我們創建了幫助函數來為我們構造HTTP請求：
 
 ```
 // colorservice.js
@@ -171,9 +171,9 @@ function request(verb, endpoint, obj, cb) {
 }
 ```
 
-包含四个参数。verb，定义了使用HTTP的动作（GET，POST，PUT，DELETE）。第二个参数是作为基础地址的后缀（例如’[http://localhost:5000/colors](http://localhost:5000/colors)'）。第三个参数是可选对象，作为JSON数据发送给服务的数据。最后一个选项是定义当响应返回时的回调。回调接收一个响应数据的响应对象。
+包含四個參數。verb，定義了使用HTTP的動作（GET，POST，PUT，DELETE）。第二個參數是作為基礎地址的後綴（例如’[http://localhost:5000/colors](http://localhost:5000/colors)'）。第三個參數是可選對象，作為JSON數據發送給服務的數據。最後一個選項是定義當響應返回時的回調。回調接收一個響應數據的響應對象。
 
-在我们发送请求前，我们需要明确我们发送和接收的JSON数据修改的请求头。
+在我們發送請求前，我們需要明確我們發送和接收的JSON數據修改的請求頭。
 
 ```
 // colorservice.js
@@ -203,9 +203,9 @@ function delete_color(name, cb) {
 }
 ```
 
-这些代码在服务实现中。在UI中我们使用服务来实现我们的命令。我们有一个存储id的ListModel和存储数据的gridModel为GridView提供数据。命令使用Button元素来发送。
+這些代碼在服務實現中。在UI中我們使用服務來實現我們的命令。我們有一個存儲id的ListModel和存儲數據的gridModel為GridView提供數據。命令使用Button元素來發送。
 
-读取服务器颜色链表。
+讀取服務器顏色鏈表。
 
 ```
 // rest.qml
@@ -227,7 +227,7 @@ Button {
 }
 ```
 
-在服务器上创建一个新的颜色。
+在服務器上創建一個新的顏色。
 
 ```
 // rest.qml
@@ -250,7 +250,7 @@ Button {
 }
 ```
 
-基于名称读取一个颜色。
+基于名稱讀取一個顏色。
 
 ```
 // rest.qml
@@ -270,7 +270,7 @@ Button {
 }
 ```
 
-基于颜色名称更新服务器上的一个颜色。
+基于顏色名稱更新服務器上的一個顏色。
 
 ```
 // rest.qml
@@ -294,7 +294,7 @@ Button {
 }
 ```
 
-基于颜色名称删除一个颜色。
+基于顏色名稱刪除一個顏色。
 
 ```
 // rest.qml
@@ -312,4 +312,4 @@ Button {
 }
 ```
 
-在CRUD（创建，读取，更新，删除）操作使用REST接口。也可以使用其它的方法来创建web服务接口。可以基于模块，每个模块都有自己的后缀。可以使用JSON RPC（[http://www.jsonrpc.org/](http://www.jsonrpc.org/)）来定义接口。当然基于XML的接口也可以使用，但是JSON在作为JavaScript部分解析进QML/JS中更有优势。
+在CRUD（創建，讀取，更新，刪除）操作使用REST接口。也可以使用其它的方法來創建web服務接口。可以基于模塊，每個模塊都有自己的後綴。可以使用JSON RPC（[http://www.jsonrpc.org/](http://www.jsonrpc.org/)）來定義接口。當然基于XML的接口也可以使用，但是JSON在作為JavaScript部分解析進QML/JS中更有優勢。

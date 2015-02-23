@@ -1,6 +1,6 @@
-# 组合模式（Composition Mode）
+# 組合模式（Composition Mode）
 
-组合允许你绘制一个形状然后与已有的像素点集合混合。画布提供了多种组合模式，使用globalCompositeOperation(mode)来设置。
+組合允許你繪制一個形狀然後與已有的像素點集合混合。畫布提供了多種組合模式，使用globalCompositeOperation(mode)來設置。
 
 * "source-over"
 
@@ -25,7 +25,7 @@
     }
 ```
 
-下面这个例子遍历了列表中的组合模式，使用对应的组合模式生成了一个矩形与圆形的组合。
+下面這個例子遍歷了列表中的組合模式，使用對應的組合模式生成了一個矩形與圓形的組合。
 
 ```
     property var operation : [

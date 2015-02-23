@@ -1,12 +1,12 @@
-# 顶点着色器（Vertex Shader）
+# 頂點著色器（Vertex Shader）
 
-顶点着色器用来操作ShaderEffect提供的顶点。正常情况下，ShaderEffect有4个顶点（左上top-left，右上top-right，左下bottom-left，右下bottom-right）。每个顶点使用vec4类型记录。为了实现顶点着色器的可视化，我们将编写一个吸收的效果。这个效果通常被用来让一个矩形窗口消失为一个点。
+頂點著色器用來操作ShaderEffect提供的頂點。正常情況下，ShaderEffect有4個頂點（左上top-left，右上top-right，左下bottom-left，右下bottom-right）。每個頂點使用vec4類型記錄。為了實現頂點著色器的可視化，我們將編寫一個吸收的效果。這個效果通常被用來讓一個矩形窗口消失為一個點。
 
 ![](http://qmlbook.org/_images/genieeffect.png)
 
-**配置场景（Setting up the scene）**
+**配置場景（Setting up the scene）**
 
-首先我们再一次配置场景。
+首先我們再一次配置場景。
 
 ```
 import QtQuick 2.0
@@ -40,15 +40,15 @@ Rectangle {
 }
 ```
 
-这个场景使用了一个黑色背景，并且提供了一个使用图片作为资源纹理的ShaderEffect。使用image元素的原图片是不可见的，只是给我们的吸收效果提供资源。此外我们在ShaderEffect的位置添加了一个同样大小的黑色矩形框，这样我们可以更加明确的知道我们需要点击哪里来重置效果。
+這個場景使用了一個黑色背景，並且提供了一個使用圖片作為資源紋理的ShaderEffect。使用image元素的原圖片是不可見的，只是給我們的吸收效果提供資源。此外我們在ShaderEffect的位置添加了一個同樣大小的黑色矩形框，這樣我們可以更加明確的知道我們需要點擊哪裡來重置效果。
 
 ![](http://qmlbook.org/_images/geniescene.png)
 
-点击图片将会触发效果，MouseArea覆盖了ShaderEffect。在onClicked操作中，我们绑定了自定义的布尔变量属性minimized。我们稍后使用这个属性来触发效果。
+點擊圖片將會觸發效果，MouseArea覆蓋了ShaderEffect。在onClicked操作中，我們綁定了自定義的布爾變量屬性minimized。我們稍後使用這個屬性來觸發效果。
 
-**最小化与正常化（Minimize and normalize）**
+**最小化與正常化（Minimize and normalize）**
 
-在我们配置好场景后，我们定义一个real类型的属性，叫做minimize，这个属性包含了我们当前最小化的值。这个值在0.0到1.0之间，由一个连续的动画来控制它。
+在我們配置好場景後，我們定義一個real類型的屬性，叫做minimize，這個屬性包含了我們當前最小化的值。這個值在0.0到1.0之間，由一個連續的動畫來控制它。
 
 ```
         property real minimize: 0.0
@@ -69,7 +69,7 @@ Rectangle {
         }
 ```
 
-这个动画绑定了由minimized属性触发。现在我们已经配置好我们的环境，最后让我们看看顶点着色器的代码。
+這個動畫綁定了由minimized屬性觸發。現在我們已經配置好我們的環境，最後讓我們看看頂點著色器的代碼。
 
 ```
         vertexShader: "
@@ -89,7 +89,7 @@ Rectangle {
             }"
 ```
 
-顶点着色器被每个顶点调用，在我们这个例子中，一共调用了四次。默认下提供qt已定义的参数，如qt_Matrix，qt_Vertex，qt_MultiTexCoord0，qt_TexCoord0。我们在之前已经讨论过这些变量。此外我们从ShaderEffect中链接minimize，width与height的值到我们的顶点着色器代码中。在main函数中，我们将当前纹理值保存在qt_TexCoord()中，让它在片段着色器中可用。现在我们拷贝当前位置，并修改顶点的x,y的位置。
+頂點著色器被每個頂點調用，在我們這個例子中，一共調用了四次。默認下提供qt已定義的參數，如qt_Matrix，qt_Vertex，qt_MultiTexCoord0，qt_TexCoord0。我們在之前已經討論過這些變量。此外我們從ShaderEffect中鏈接minimize，width與height的值到我們的頂點著色器代碼中。在main函數中，我們將當前紋理值保存在qt_TexCoord()中，讓它在片段著色器中可用。現在我們拷貝當前位置，並修改頂點的x,y的位置。
 
 ```
 highp vec4 pos = qt_Vertex;
@@ -97,22 +97,22 @@ pos.y = mix(qt_Vertex.y, height, minimize);
 pos.x = mix(qt_Vertex.x, width, minimize);
 ```
 
-mix(...)函数提供了一种在两个参数之间（0.0到1.0）的线性插值的算法。在我们的例子中，在当前y值与高度值之间基于minimize的值插值获得y值，x的值获取类似。记住minimize的值是由我们的连续动画控制，并且在0.0到1.0之间（反之亦然）。
+mix(...)函數提供了一種在兩個參數之間（0.0到1.0）的線性插值的算法。在我們的例子中，在當前y值與高度值之間基于minimize的值插值獲得y值，x的值獲取類似。記住minimize的值是由我們的連續動畫控制，並且在0.0到1.0之間（反之亦然）。
 
 ![](http://qmlbook.org/_images/genieminimize.png)
 
-这个结果的效果不是真正吸收效果，但是已经能朝着这个目标完成了一大步。
+這個結果的效果不是真正吸收效果，但是已經能朝著這個目標完成了一大步。
 
-**基础弯曲（Primitive Bending）**
+**基礎彎曲（Primitive Bending）**
 
-我们已经完成了最小化我们的坐标。现在我们想要修改一下对x值的操作，让它依赖当前的y值。这个改变很简单。y值计算在前。x值的插值基于当前顶点的y坐标。
+我們已經完成了最小化我們的坐標。現在我們想要修改一下對x值的操作，讓它依賴當前的y值。這個改變很簡單。y值計算在前。x值的插值基于當前頂點的y坐標。
 
 ```
 highp float t = pos.y / height;
 pos.x = mix(qt_Vertex.x, width, t * minimize);
 ```
 
-这个结果造成当y值比较大时，x的位置更靠近width的值。也就是说上面2个顶点根本不受影响，它们的y值始终为0，下面两个顶点的x坐标值更靠近width的值，它们最后转向同一个x值。
+這個結果造成當y值比較大時，x的位置更靠近width的值。也就是說上面2個頂點根本不受影響，它們的y值始終為0，下面兩個頂點的x坐標值更靠近width的值，它們最後轉向同一個x值。
 
 ![](http://qmlbook.org/_images/geniebending.png)
 
@@ -177,9 +177,9 @@ Rectangle {
                 gl_Position = qt_Matrix * pos;
 ```
 
-**更好的弯曲（Better Bending）**
+**更好的彎曲（Better Bending）**
 
-现在简单的弯曲并不能真正的满足我们的要求，我们将添加几个部件来提升它的效果。首先我们增加动画，支持一个自定义的弯曲属性。这是非常必要的，由于弯曲立即发生，y值的最小化需要被推迟。两个动画在同一持续时间计算总和（300+700+100与700+1300）。
+現在簡單的彎曲並不能真正的滿足我們的要求，我們將添加幾個部件來提升它的效果。首先我們增加動畫，支持一個自定義的彎曲屬性。這是非常必要的，由于彎曲立即發生，y值的最小化需要被推遲。兩個動畫在同一持續時間計算總和（300+700+100與700+1300）。
 
 ```
         property real bend: 0.0
@@ -210,7 +210,7 @@ Rectangle {
         }
 ```
 
-此外，为了使弯曲更加平滑，不再使用y值影响x值的弯曲函数，pos.x现在依赖新的弯曲属性动画：
+此外，為了使彎曲更加平滑，不再使用y值影響x值的彎曲函數，pos.x現在依賴新的彎曲屬性動畫：
 
 ```
 highp float t = pos.y / height;
@@ -218,25 +218,25 @@ t = (3.0 - 2.0 * t) * t * t;
 pos.x = mix(qt_Vertex.x, width, t * bend);
 ```
 
-弯曲从0.0平滑开始，逐渐加快，在1.0时逐渐平滑。下面是这个函数在指定范围内的曲线图。对于我们，只需要关注0到1的区间。
+彎曲從0.0平滑開始，逐漸加快，在1.0時逐漸平滑。下面是這個函數在指定範圍內的曲線圖。對于我們，只需要關注0到1的區間。
 
 ![](http://qmlbook.org/_images/curve.png)
 
-想要获得最大化的视觉改变，需要增加我们的顶点数量。可以使用网眼（mesh）来增加顶点：
+想要獲得最大化的視覺改變，需要增加我們的頂點數量。可以使用網眼（mesh）來增加頂點：
 
 ```
 mesh: GridMesh { resolution: Qt.size(16, 16) }
 ```
 
-现在ShaderEffect被分布为16x16顶点的网格，替换了之前2x2的顶点。这样顶点之间的插值将会看起来更加平滑。
+現在ShaderEffect被分布為16x16頂點的網格，替換了之前2x2的頂點。這樣頂點之間的插值將會看起來更加平滑。
 
 ![](http://qmlbook.org/_images/geniesmoothbending.png)
 
-你可以看见曲线的变化，在最后让弯曲变得非常平滑。这让弯曲有了更加强大的效果。
+你可以看見曲線的變化，在最後讓彎曲變得非常平滑。這讓彎曲有了更加強大的效果。
 
-**侧面收缩（Choosing Sides）**
+**側面收縮（Choosing Sides）**
 
-最后一个增强，我们希望能够收缩边界。边界朝着吸收的点消失。直到现在它总是在朝着width值的点消失。添加一个边界属性，我们能够修改这个点在0到width之间。
+最後一個增強，我們希望能夠收縮邊界。邊界朝著吸收的點消失。直到現在它總是在朝著width值的點消失。添加一個邊界屬性，我們能夠修改這個點在0到width之間。
 
 ```
 ShaderEffect {
@@ -254,9 +254,9 @@ ShaderEffect {
 
 ![](http://qmlbook.org/_images/geniehalfside.png)
 
-**包装（Packing）**
+**包裝（Packing）**
 
-最后将我们的效果包装起来。将我们吸收效果的代码提取到一个叫做GenieEffect的自定义组件中。它使用ShaderEffect作为根元素。移除掉MouseArea，这不应该放在组件中。绑定minimized属性来触发效果。
+最後將我們的效果包裝起來。將我們吸收效果的代碼提取到一個叫做GenieEffect的自定義組件中。它使用ShaderEffect作為根元素。移除掉MouseArea，這不應該放在組件中。綁定minimized屬性來觸發效果。
 
 ```
 import QtQuick 2.0
@@ -337,7 +337,7 @@ ShaderEffect {
 }
 ```
 
-你现在可以像这样简单的使用这个效果：
+你現在可以像這樣簡單的使用這個效果：
 
 ```
 import QtQuick 2.0
@@ -356,4 +356,4 @@ Rectangle {
 }
 ```
 
-我们简化了代码，移除了背景矩形框，直接使用图片完成效果，替换了在一个单独的图像元素中加载它。
+我們簡化了代碼，移除了背景矩形框，直接使用圖片完成效果，替換了在一個單獨的圖像元素中加載它。

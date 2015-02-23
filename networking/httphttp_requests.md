@@ -1,10 +1,10 @@
-# HTTP请求（HTTP Requests）
+# HTTP請求（HTTP Requests）
 
-从c++方面来看，Qt中完成http请求通常是使用QNetworkRequest和QNetworkReply，然后使用Qt/C++将响应推送到集成的QML。所以我们尝试使用QtQuick的工具给我们的网络信息尾部封装了小段信息，然后推送这些信息。为此我们使用一个帮助对象来构造http请求，和循环响应。它使用java脚本的XMLHttpRequest对象的格式。
+從c++方面來看，Qt中完成http請求通常是使用QNetworkRequest和QNetworkReply，然後使用Qt/C++將響應推送到集成的QML。所以我們嘗試使用QtQuick的工具給我們的網絡信息尾部封裝了小段信息，然後推送這些信息。為此我們使用一個幫助對象來構造http請求，和循環響應。它使用java腳本的XMLHttpRequest對象的格式。
 
-XMLHttpRequest对象允许用户注册一个响应操作函数和一个链接。一个请求能够使用http动作来发送（如get，post，put，delete，等等）。当响应到达时，会调用注册的操作函数。操作函数会被调用多次。每次调用请求的状态都已经改变（例如信息头部已接收，或者响应完成）。
+XMLHttpRequest對象允許用戶注冊一個響應操作函數和一個鏈接。一個請求能夠使用http動作來發送（如get，post，put，delete，等等）。當響應到達時，會調用注冊的操作函數。操作函數會被調用多次。每次調用請求的狀態都已經改變（例如信息頭部已接收，或者響應完成）。
 
-下面是一个简短的例子：
+下面是一個簡短的例子：
 
 ```
 function request() {
@@ -21,7 +21,7 @@ function request() {
 }
 ```
 
-从一个响应中你可以获取XML格式的数据或者是原始文本。可以遍历XML结果但是通常使用原始文本来匹配JSON格式响应。使用JSON.parse(text）可以JSON文档将转换为JS对象使用。
+從一個響應中你可以獲取XML格式的數據或者是原始文本。可以遍歷XML結果但是通常使用原始文本來匹配JSON格式響應。使用JSON.parse(text）可以JSON文檔將轉換為JS對象使用。
 
 ```
 ...
@@ -31,26 +31,26 @@ function request() {
 }
 ```
 
-在响应操作中，我们访问原始响应文本并且将它转换为一个javascript对象。JSON对象是一个可以使用的JS对象（在javascript中，一个对象可以是对象或者一个数组）。
+在響應操作中，我們訪問原始響應文本並且將它轉換為一個javascript對象。JSON對象是一個可以使用的JS對象（在javascript中，一個對象可以是對象或者一個數組）。
 
 **注意**
 
-**toString()转换似乎让代码更加稳定。在不使用显式的转换下我有几次都解析错误。不确定是什么问题引起的。**
+**toString()轉換似乎讓代碼更加穩定。在不使用顯式的轉換下我有幾次都解析錯誤。不確定是什麼問題引起的。**
 
-## 11.3.1 Flickr调用（Flickr Call）
+## 11.3.1 Flickr調用（Flickr Call）
 
-让我们看看更加真实的例子。一个典型的例子是使用网络相册服务来取得公共订阅中新上传的图片。我们可以使用[http://api.flicker.com/services/feeds/photos_public.gne](http://api.flicker.com/services/feeds/photos_public.gne)链接。不幸的是它默认返回XML流格式的数据，在qml中可以很方便的使用XmlListModel来解析。为了达到只关注JSON数据的目的，我们需要在请求中附加一些参数可以得到JSON响应：[http://api.flickr.com/services/feeds/photo_public.gne?format=json&nojsoncallback=1](http://api.flickr.com/services/feeds/photo_public.gne?format=json&nojsoncallback=1)。这将会返回一个没有JSON回调的JSON响应。
+讓我們看看更加真實的例子。一個典型的例子是使用網絡相冊服務來取得公共訂閱中新上傳的圖片。我們可以使用[http://api.flicker.com/services/feeds/photos_public.gne](http://api.flicker.com/services/feeds/photos_public.gne)鏈接。不幸的是它默認返回XML流格式的數據，在qml中可以很方便的使用XmlListModel來解析。為了達到只關注JSON數據的目的，我們需要在請求中附加一些參數可以得到JSON響應：[http://api.flickr.com/services/feeds/photo_public.gne?format=json&nojsoncallback=1](http://api.flickr.com/services/feeds/photo_public.gne?format=json&nojsoncallback=1)。這將會返回一個沒有JSON回調的JSON響應。
 
 **注意**
-**一个JSON回调将JSON响应包装在一个函数调用中。这是一个HTML编程中的快捷方式，使用脚本标记来创建一个JSON请求。响应将触发本地定义的回调函数。在QML中没有JSON回调的工作机制。**
+**一個JSON回調將JSON響應包裝在一個函數調用中。這是一個HTML編程中的快捷方式，使用腳本標記來創建一個JSON請求。響應將觸發本地定義的回調函數。在QML中沒有JSON回調的工作機制。**
 
-使用curl来查看响应：
+使用curl來查看響應：
 
 ```
 curl "http://api.flickr.com/services/feeds/photos_public.gne?format=json&nojsoncallback=1&tags=munich"
 ```
 
-响应如下：
+響應如下：
 
 ```
 {
@@ -71,7 +71,7 @@ curl "http://api.flickr.com/services/feeds/photos_public.gne?format=json&nojsonc
 }
 ```
 
-JSON文档已经定义了结构体。一个对象包含一个标题和子项的属性。标题是一个字符串，子项是一组对象。当转换文本为一个JSON文档后，你可以单独访问这些条目，它们都是可用的JS对象或者结构体数组。
+JSON文檔已經定義了結構體。一個對象包含一個標題和子項的屬性。標題是一個字符串，子項是一組對象。當轉換文本為一個JSON文檔後，你可以單獨訪問這些條目，它們都是可用的JS對象或者結構體數組。
 
 ```
 // JS code
@@ -84,7 +84,7 @@ for(var i=0; i<obj.items.length; i++) {
 }
 ```
 
-我们可以使用obj.items数组将JS数组作为链表视图的模型，试着完成这个操作。首先我们需要取得响应并且将它转换为可用的JS对象。然后设置response.items属性作为链表视图的模型。
+我們可以使用obj.items數組將JS數組作為鏈表視圖的模型，試著完成這個操作。首先我們需要取得響應並且將它轉換為可用的JS對象。然後設置response.items屬性作為鏈表視圖的模型。
 
 ```
 function request() {
@@ -103,7 +103,7 @@ function request() {
 }
 ```
 
-下面是完整的源代码，当组件加载完成后，我们创建请求。然后使用请求的响应作为我们链表视图的模型。
+下面是完整的源代碼，當組件加載完成後，我們創建請求。然後使用請求的響應作為我們鏈表視圖的模型。
 
 ```
 import QtQuick 2.0
@@ -142,6 +142,6 @@ Rectangle {
 }
 ```
 
-当文档完整加载后（Component.onCompleted）,我们从Flickr请求最新的订阅内容。我们解析JSON的响应并且设置item数组作为我们视图的模型。链表视图有一个代理可以在一行中显示图标缩略图和标题文本。
+當文檔完整加載後（Component.onCompleted）,我們從Flickr請求最新的訂閱內容。我們解析JSON的響應並且設置item數組作為我們視圖的模型。鏈表視圖有一個代理可以在一行中顯示圖標縮略圖和標題文本。
 
-另一种方法是添加一个ListModel，并且将每个子项添加到链表模型中。为了支持更大的模型，需要支持分页和懒加载。
+另一種方法是添加一個ListModel，並且將每個子項添加到鏈表模型中。為了支持更大的模型，需要支持分頁和懶加載。
